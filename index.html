@@ -5,19 +5,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
-  <!-- Compiled and minified JavaScript -->
   
   <link rel="stylesheet" href="./assets/css/style.css" />
     <title>Board Game Party</title>
   </head>
 
-  <header>
-
-
-  </header>
-
+  
   <body>
+    <header>
+      <div class="row s12">
+        <div class="input-field col s2">
+          <input id="inputMax" type="text" class="validate">
+          <label class="active" for="inputMax">Maximum Players</label>
+        </div>
+        
+        
+        <div class="input-field col s2">
+          <input id="inputMin" type="text" class="validate">
+          <label class="active" for="inputMin">Minimum Players</label>
+        </div>
+        
+        <div class="input-field col s2">
+          <input id="inputTime" type="text" class="validate">
+          <label class="active" for="inputTime">Max Time</label>
+        </div>
+        
+        <div class="row">
+          <div class="input-field col s2">
+            <input type="text" id="inputCategory" class="autocomplete">
+            <label for="inputCategory">Autocomplete</label>
+          </div>
+        </div>
+              
+        <button class="btn waves-effect waves-light" type="submit" name="action">Submit
+          <i class="material-icons right">send</i>
+        </button>
+        
+        
+      </div>
+  
+  
+    </header>
     <main>
         <div class="gameSearch">
             <h1 id="gameSearchTitle"></h1>
