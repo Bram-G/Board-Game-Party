@@ -3,7 +3,7 @@ Uses multiple API's to search a board game database and then shows a link on whe
 
 ## New Tech
 
-- Tailwind CSS
+- Materialize
 - Board Game Atlas API
 - Youtube API
 
