@@ -53,3 +53,16 @@ Never again fear for a boring event that you host for your loved ones!
 - Separate page for locally stored games.
 - General UI improvements.
 - Ability to sort by completely random or top rated for recommended games.
+
+## Naming Convention
+
+- Game API Naming
+    - gameTypeTag
+        - Type is Search, Random, Input
+        - These will be used for each respective type of element.
+- YouTube API Naming TBD
+
+## Potential Issues
+
+- Probably just contruct an amazon link.
+- Try to include a link to buy or construct an amazon link to a search result.
