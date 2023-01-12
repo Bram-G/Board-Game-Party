@@ -1,6 +1,6 @@
-* {
-    /* border: 1px solid black; */
-}
+/* * {
+    border: 1px solid black;
+} */
 #searchSubmitButton{
     display: flex;
     justify-content: center;
@@ -48,3 +48,24 @@
 
 }
 
+
+#lower-section {
+    display:flex;
+    justify-content: flex-start;
+    flex-direction: row;
+}
+
+#generatedSearchCard {
+    min-height:350px;
+}
+
+#lower-section img {
+    transition:margin 0.7s ease-in-out;
+    transition:all 1s;
+}
+
+#lower-section img:hover {
+    scale:102%;
+    margin-top:-10px;
+    margin-left:-10px;
+}
