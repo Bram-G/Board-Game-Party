@@ -21,7 +21,7 @@
     <title>Board Game Party</title>
   </head>
 
-  <body class="grey darken-3">
+  <body>
     <header>
       <div class="row s12">
         <div class="input-field col s2" id="searchInputs">
@@ -83,7 +83,9 @@
       <div>
         <div class="row">
         <div class="row" id="lower-section">
-          <div class="gameRandom col s12 m5 l5">
+          <div class="gameRandom col s12 m7 l7">
+
+            <!-- Section to generate -->
             <div class="card small z-depth-4" id="generatedSearchCard">
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="" id="gameRandomImage" />
@@ -96,7 +98,7 @@
                   Card Title
                   <i class="material-icons right">more_vert</i>
                 </span>
-                <p><a href="#">This is a link</a></p>
+                <p id="gameSearchPublisher"></p>
               </div>
               <div class="card-reveal grey lighten-1">
                 <span class="card-title grey-text text-darken-4">
@@ -104,25 +106,15 @@
                   <i class="material-icons right">close</i>
                 </span>
                 <p>
-                  Here is some more information about this product that is only
-                  revealed once clicked on.
+                  Need to add description, MSRP, playtime and extra info here.
                 </p>
               </div>
             </div>
-            <h1 id="gameRandomTitle"></h1>
 
-            <p id="gameRandomRating"></p>
 
-            <p id="gameRandomReleaseDate"></p>
-
-            <p id="gameRandomMsrp"></p>
-
-            <p id="gameRandomPublisher"></p>
-
-            <img id="gameRandomImage" />
           </div>
 
-          <div class="gameHistory col s12 m7 l7">
+          <div class="gameHistory col s12 m5 l5">
 
             <div class="col s12" id="pastGameCard">
               <div class="card horizontal deep-purple lighten-1 z-depth-4">
@@ -156,3 +148,17 @@
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
+
+
+
+<!-- <h1 id="gameRandomTitle"></h1>
+
+<p id="gameRandomRating"></p>
+
+<p id="gameRandomReleaseDate"></p>
+
+<p id="gameRandomMsrp"></p>
+
+<p id="gameRandomPublisher"></p>
+
+<img id="gameRandomImage" /> -->

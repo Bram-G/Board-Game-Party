@@ -18,14 +18,17 @@
     flex-direction: row;
 }
 
+#generatedSearchCard {
+    min-height:350px;
+}
 
 #lower-section img {
     transition:margin 0.7s ease-in-out;
-    transition:scale 2s ease-in-out;
+    transition:all 1s;
 }
 
 #lower-section img:hover {
-    scale:105%;
+    scale:102%;
     margin-top:-10px;
     margin-left:-10px;
 }

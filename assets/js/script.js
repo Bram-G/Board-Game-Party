@@ -6,7 +6,7 @@ let searchButton = document.querySelector(".btn");
 
 const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`;
 const endPointAtlasSearchTEST = `https://api.boardgameatlas.com/api/search?name=catan&client_id=gwluPRwMeB&pretty=true`;
-const YT_API_KEY = "AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI";
+const YT_API_KEY = "AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM";
 /*
 bga api search criteria min_players= max_players= lt_max_playtime= categories=
 */
@@ -92,3 +92,5 @@ function searchYoutube(url) {
       console.log(data);
     });
 }
+
+// function generateExtraCards()
