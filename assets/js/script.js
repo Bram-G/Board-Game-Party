@@ -14,7 +14,9 @@ bga api search criteria min_players= max_players= lt_max_playtime= categories=
 //gameSearch(endPointAtlasSearchTEST);
 //gameRandom(endPointAtlasRandom)
 
-searchButton.addEventListener('click', ()=> {
+searchButton.addEventListener('click', (e)=> {
+    e.preventDefault();
+    
     let baseURL = "https://api.boardgameatlas.com/api/search?"
     let endURL = "client_id=gwluPRwMeB&pretty=true";
 
