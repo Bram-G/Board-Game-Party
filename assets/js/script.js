@@ -1,7 +1,7 @@
 let maxPlayersInput = document.querySelector('#inputMax');
 let minPlayersInput = document.querySelector('#inputMin');
 let maxTimeInput = document.querySelector('#inputTime');
-let gameCategoryInput = document.querySelector('#inputCategory');
+let gameNameInput = document.querySelector('#gameNameInput');
 let searchButton = document.querySelector('.btn');
 
 const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`
@@ -29,8 +29,8 @@ searchButton.addEventListener('click', (e)=> {
     if(maxTimeInput.value && parseInt(maxTimeInput.value)){
         baseURL += `lt_max_playtime=${maxTimeInput.value}&`;
     }
-    if(gameCategoryInput.value){
-        baseURL += `categories=${gameCategoryInput.value}&`;
+    if(gameNameInput.value){
+        baseURL += `name=${gameNameInput.value}&`;
     }
 
     console.log(baseURL + endURL);
@@ -83,6 +83,18 @@ function searchYoutube(url) {
         })
 }
 
+
+
+
+
+
+
+
+// Brams styling js
+
+$(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
 
 
         
