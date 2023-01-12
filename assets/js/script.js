@@ -1,7 +1,7 @@
 let maxPlayersInput = document.querySelector('#inputMax');
 let minPlayersInput = document.querySelector('#inputMin');
 let maxTimeInput = document.querySelector('#inputTime');
-let gameCategoryInput = document.querySelector('#inputCategory');
+let gameNameInput = document.querySelector('#gameNameInput');
 let searchButton = document.querySelector('.btn');
 // ah-api-key = AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI
 // ah-api-key2 = AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM
@@ -31,8 +31,8 @@ searchButton.addEventListener('click', (e)=> {
     if(maxTimeInput.value && parseInt(maxTimeInput.value)){
         baseURL += `lt_max_playtime=${maxTimeInput.value}&`;
     }
-    if(gameCategoryInput.value){
-        baseURL += `categories=${gameCategoryInput.value}&`;
+    if(gameNameInput.value){
+        baseURL += `name=${gameNameInput.value}&`;
     }
 
     gameSearch(baseURL + endURL);
@@ -93,3 +93,13 @@ function searchYoutube(url) {
 
         })
 }
+$(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+
+
+
+        
+
+
+
