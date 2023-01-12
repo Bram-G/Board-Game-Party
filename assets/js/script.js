@@ -4,10 +4,11 @@ let maxTimeInput = document.querySelector('#inputTime');
 let gameCategoryInput = document.querySelector('#inputCategory');
 let searchButton = document.querySelector('.btn');
 // ah-api-key = AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI
+// ah-api-key2 = AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
 const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`
 const endPointAtlasSearch = `https://api.boardgameatlas.com/api/search?name=catan&client_id=gwluPRwMeB&pretty=true`
-const YT_API_KEY = 'AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY'
+const YT_API_KEY = 'AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM'
 /*
 bga api search criteria min_players= max_players= lt_max_playtime= categories=
 */
