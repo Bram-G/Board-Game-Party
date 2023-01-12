@@ -9,6 +9,8 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
     />
+    <!-- linked materialize icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Compiled and minified JavaScript -->
 
@@ -19,49 +21,41 @@
   <body>
     <header>
       <div class="row s12">
-        <div class="input-field col s2">
+        <div class="input-field col s2" id="searchInputs">
           <input id="inputMax" type="text" class="validate" />
           <label class="active" for="inputMax">Maximum Players</label>
         </div>
 
-        <div class="input-field col s2">
+        <div class="input-field col s2" id="searchInputs">
           <input id="inputMin" type="text" class="validate" />
           <label class="active" for="inputMin">Minimum Players</label>
         </div>
 
-        <div class="input-field col s2">
+        <div class="input-field col s2" id="searchInputs">
           <input id="inputTime" type="text" class="validate" />
           <label class="active" for="inputTime">Max Time</label>
         </div>
 
 
-        <div class="input-field col s2">
+        <div class="input-field col s2" id="searchInputs">
           <input type="text" id="inputCategory" class="autocomplete" />
           <label for="inputCategory">Autocomplete</label>
         </div>
-      </div>
->>>>>>> dev
-
-      <div class="row">
-        <button
-          class="btn waves-effect waves-light"
+        <div id="searchSubmitButton">
+          <button
+          class="btn waves-effect waves-light s2"
+          id="submitButton"
           type="submit"
           name="action"
-        >
+          >
           Submit
-          <i class="material-icons right">send</i>
+          <i class="material-icons right"> search</i>
         </button>
       </div>
+    </div>
+
     </header>
     <main>
-      <form id="search">
-        <input
-          type="text"
-          id="gameSearchInput"
-          placeholder="Search for a game"
-        />
-        <button type="submit" id="searchBtn">Search</button>
-      </form>
       <h1 id="gameSearchTitle"></h1>
 
       <a id="gameAmazonSearch" target="_blank"></a>
