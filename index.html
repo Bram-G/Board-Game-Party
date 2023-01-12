@@ -19,66 +19,80 @@
     <header>
       <div class="row s12">
         <div class="input-field col s2">
-          <input id="inputMax" type="text" class="validate">
+          <input id="inputMax" type="text" class="validate" />
           <label class="active" for="inputMax">Maximum Players</label>
         </div>
-        
-        
+
         <div class="input-field col s2">
-          <input id="inputMin" type="text" class="validate">
+          <input id="inputMin" type="text" class="validate" />
           <label class="active" for="inputMin">Minimum Players</label>
         </div>
-        
+
         <div class="input-field col s2">
-          <input id="inputTime" type="text" class="validate">
+          <input id="inputTime" type="text" class="validate" />
           <label class="active" for="inputTime">Max Time</label>
         </div>
-        
 
-          <div class="input-field col s2">
-            <input type="text" id="inputCategory" class="autocomplete">
-            <label for="inputCategory">Autocomplete</label>
-          </div>
+        <div class="input-field col s2">
+          <input type="text" id="inputCategory" class="autocomplete" />
+          <label for="inputCategory">Autocomplete</label>
         </div>
-          
-        <div class="row">
-          <button class="btn waves-effect waves-light" type="submit" name="action">Submit
-            <i class="material-icons right">send</i>
-          </button>
-        </div>
-        
-        
+      </div>
 
-  
-  
+      <div class="row">
+        <button
+          class="btn waves-effect waves-light"
+          type="submit"
+          name="action"
+        >
+          Submit
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
     </header>
     <main>
-        <div class="gameSearch">
-            <h1 id="gameSearchTitle"></h1>
-            <br>
-            <p id="gameSearchRating"></p>
-            <br>
-            <p id="gameSearchReleaseDate"></p>
-            <br>
-            <p id="gameSearchMsrp"></p>
-            <br>
-            <p id="gameSearchPublisher"></p>
-            <br>
-            <img id="gameSearchImage">
-        </div>  
-        <div class="gameRandom">
-            <h1 id="gameRandomTitle"></h1>
-            <br>
-            <p id="gameRandomRating"></p>
-            <br>
-            <p id="gameRandomReleaseDate"></p>
-            <br>
-            <p id="gameRandomMsrp"></p>
-            <br>
-            <p id="gameRandomPublisher"></p>
-            <br>
-            <img id="gameRandomImage">
-        </div>
+      <form id="search">
+        <input
+          type="text"
+          id="gameSearchInput"
+          placeholder="Search for a game"
+        />
+        <button type="submit" id="searchBtn">Search</button>
+      </form>
+      <h1 id="gameSearchTitle"></h1>
+      <br />
+      <a id="gameAmazonSearch" target="_blank"></a>
+      <br />
+      <a id="gameYoutubeSearch1" target="_blank"></a>
+      <br />
+      <a id="gameYoutubeSearch2" target="_blank"></a>
+      <br />
+      <div class="gameSearch">
+        <h1 id="gameSearchTitle"></h1>
+        <br />
+        <p id="gameSearchRating"></p>
+        <br />
+        <p id="gameSearchReleaseDate"></p>
+        <br />
+        <p id="gameSearchMsrp"></p>
+        <br />
+        <p id="gameSearchPublisher"></p>
+        <br />
+        <img id="gameSearchImage" />
+      </div>
+      <div class="gameRandom">
+        <h1 id="gameRandomTitle"></h1>
+        <br />
+        <p id="gameRandomRating"></p>
+        <br />
+        <p id="gameRandomReleaseDate"></p>
+        <br />
+        <p id="gameRandomMsrp"></p>
+        <br />
+        <p id="gameRandomPublisher"></p>
+        <br />
+        <img id="gameRandomImage" />
+      </div>
     </main>
 
     <script
