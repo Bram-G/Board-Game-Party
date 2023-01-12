@@ -89,12 +89,6 @@ function searchYoutube(url) {
             document.getElementById("gameYoutubeSearch1").textContent = data.items[0].snippet.title;
             document.getElementById("gameYoutubeSearch2").href = `https://www.youtube.com/watch?v=${data.items[1].id.videoId}`;
             document.getElementById("gameYoutubeSearch2").textContent = data.items[1].snippet.title;
+
         })
 }
-
-
-
-        
-
-
-
