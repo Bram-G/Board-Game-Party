@@ -40,7 +40,6 @@ searchButton.addEventListener("click", (e) => {
   gameSearch(baseURL + endURL);
   gameRandom(baseURL + endURL);
 
-    generatePastGameCard();
 });
 
 // Pulling a random game and some brief info from the Board Game Atlas API
@@ -49,6 +48,7 @@ function gameRandom(url) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+      lowerSection.innerHTML = "";
       for (let index = 1; index < 5; index++) {
         generateCards(
           data.games[index].name,
@@ -61,12 +61,6 @@ function gameRandom(url) {
           data.games[index].id
         );
       }
-      // document.getElementById('gameRandomTitle').textContent = "Title: " + data.games[0].name
-      // document.getElementById('gameRandomImage').src = data.games[0].images.medium
-      //document.getElementById('gameRandomRating').textContent = "Rating: " + data.games[0].average_user_rating
-      //document.getElementById('gameRandomReleaseDate').textContent = "Release Date: " + data.games[0].year_published
-      //document.getElementById('gameRandomMsrp').textContent = "MSRP: $" + data.games[0].msrp
-      //document.getElementById('gameRandomPublisher').textContent = "Publisher: " + data.games[0].primary_publisher.name
     });
 }
 
@@ -76,6 +70,10 @@ function gameSearch(url) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
+
+      let gameTitle = data.games[0].name;
+      let youTubeSearch = `${gameTitle} boardgame`;
+    
       document.getElementById("gameSearchTitle").textContent =
         "Title: " + data.games[0].name;
       document.getElementById("gameSearchImage").src =
@@ -89,8 +87,7 @@ function gameSearch(url) {
       document.getElementById("gameSearchPublisher").textContent =
         "Publisher: " + data.games[0].primary_publisher.name;
 
-      let gameTitle = data.games[0].name;
-      let youTubeSearch = `${gameTitle} boardgame`;
+      generatePastGameCard(data.games[0].images.medium ,gameTitle, data.games[0].primary_publisher.name);
 
       const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
       searchYoutube(endPointYoutubeSearch);
@@ -187,8 +184,8 @@ function generateCards(
   let innerMostDiv = genEle("div");
   innerMostDiv.setAttribute("class", "card-action");
   let innerAnchor = genEle("a");
-  innerAnchor.setAttribute("class", "waves-effect waves-light btn");
-  innerAnchor.textContent = "Save Game To History";
+  innerAnchor.setAttribute("class", "waves-effect waves-light light-blue btn");
+  innerAnchor.textContent = "Save Game";
   let innerMostI = genEle("i");
   innerMostI.setAttribute("class", "material-icons left");
   innerMostI.setAttribute("id", "gameHistoryID");
@@ -209,7 +206,7 @@ function generateCards(
 }
 
 
-function generatePastGameCard(){
+function generatePastGameCard(gameImage, gameName, gamePublisher){
     let div_1 = genEle('div');
     div_1.setAttribute("class", "col s10");
     div_1.setAttribute("id", "pastGameCard");
@@ -222,7 +219,7 @@ function generatePastGameCard(){
     div_2.append(div_2_1);
     div_2_1.setAttribute("class", "card-image");
     let img = genEle('img');
-    img.setAttribute("src", "");
+    img.setAttribute("src", gameImage);
     img.setAttribute("id", "gameRandomImage");
     div_2_1.append(img);
 
@@ -233,68 +230,9 @@ function generatePastGameCard(){
     let div_2_2_1 = genEle('div');
     div_2_2_1.setAttribute("class", "card-content");
     let p1 = genEle('p');
-    p1.textContent = "Past Game Name"
+    p1.textContent = gameName;
     let p2 = genEle('p');
-    p2.textContent = "Past Game Publisher"
-    div_2_2_1.append(p1);
-    div_2_2_1.append(p2);
-    div_2_2.append(div_2_2_1);
-
-    let div_2_2_2 = genEle('div');
-    div_2_2_2.setAttribute("class", "card-action");
-    div_2_2_2.setAttribute("id", "card-action-flex");
-    let a1 = genEle('a');
-    a1.setAttribute("class", "waves-effect waves-light btn light-blue");
-    a1.setAttribute("id", "pastSearchBtn")
-    a1.textContent = "Show This Search";
-    let i1 = genEle('i')
-    i1.setAttribute("class", "material-icons left");
-    i1.textContent = "history";
-    a1.append(i1);
-    div_2_2_2.append(a1);
-
-    let a2 = genEle('a');
-    a2.setAttribute("class", "waves-effect waves-light btn red darken-2");
-    a2.setAttribute("id", "pastSearchDelete");
-    a2.textContent = "Delete From History";
-    let i2 = genEle('i');
-    i2.setAttribute("class", "material-icons right");
-    i2.textContent = "delete_forever";
-    a2.append(i2);
-    div_2_2_2.append(a2);
-    div_2_2.append(div_2_2_2);
-
-    gameHistory.prepend(div_1);
-}
-
-
-function generatePastGameCard(){
-    let div_1 = genEle('div');
-    div_1.setAttribute("class", "col s10");
-    div_1.setAttribute("id", "pastGameCard");
-
-    let div_2 = genEle('div');
-    div_1.append(div_2);
-    div_2.setAttribute("class", "card horizontal deep-purple lighten-2 z-depth-4")
-
-    let div_2_1 = genEle('div');
-    div_2.append(div_2_1);
-    div_2_1.setAttribute("class", "card-image");
-    let img = genEle('img');
-    img.setAttribute("src", "");
-    img.setAttribute("id", "gameRandomImage");
-    div_2_1.append(img);
-
-    let div_2_2 = genEle('div');
-    div_2.append(div_2_2);
-    div_2_2.setAttribute("class", "card-stacked");
-
-    let div_2_2_1 = genEle('div');
-    div_2_2_1.setAttribute("class", "card-content");
-    let p1 = genEle('p');
-    p1.textContent = "Past Game Name"
-    let p2 = genEle('p');
-    p2.textContent = "Past Game Publisher"
+    p2.textContent = gamePublisher;
     div_2_2_1.append(p1);
     div_2_2_1.append(p2);
     div_2_2.append(div_2_2_1);
