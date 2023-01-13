@@ -21,17 +21,27 @@
     <title>Board Game Party</title>
   </head>
 
-  <body>
+  <body class="grey lighten-3">
     <header>
-      <div class="row s12" id = "searchHeader">
+
+      <nav>
+        <div class="nav-wrapper blue lighten-1">
+          <a class="brand-logo">Board Game Party</a>
+          <ul id="nav-mobile" class="right hide-on-med-and-down">
+            <li><a href="https://github.com/Bram-G/Board-Game-Party" target="_blank">Github Repository</a></li>
+          </ul>
+        </div>
+      </nav>
+
+      <div class="row s12 " id = "searchHeader">
         <div class="input-field col s2" id="searchInputs">
           <input id="inputMax" type="text" class="validate" />
-          <label class="active" for="inputMax">Maximum Players</label>
+          <label class="active" for="inputMax">Max Players</label>
         </div>
 
         <div class="input-field col s2" id="searchInputs">
           <input id="inputMin" type="text" class="validate" />
-          <label class="active" for="inputMin">Minimum Players</label>
+          <label class="active" for="inputMin">Min Players</label>
         </div>
 
         <div class="input-field col s2" id="searchInputs">
@@ -46,7 +56,7 @@
 
         <div id="searchSubmitButton">
           <button
-            class="btn waves-effect waves-light s2"
+            class="btn waves-effect waves-light s2 light-blue"
             id="submitButton"
             type="submit"
             name="action"
@@ -81,7 +91,7 @@
     
               <a id="gameYoutubeSearch2" target="_blank">Youtube Video</a>
               <div class="card-action">
-                <a class="waves-effect waves-light btn"><i class="material-icons left" id="gameHistoryID">history</i>Save Game</a>
+                <a class="waves-effect waves-light btn light-blue"><i class="material-icons left" id="gameHistoryID">history</i>Save Game</a>
               </div>
             </div>
           </div>
@@ -93,12 +103,14 @@
       <div id="generate-cards">
 
         <div class="row" id="lower-section">
-<!-- Append generatedSearchCard to lower-section -->
+      <!-- Append generatedSearchCard to lower-section -->
             <!-- Section to generate -->
-            <div class="card small z-depth-4 col s12 m5 l5" id="generatedSearchCard">
+            <!-- <div class="card small z-depth-4 col s12 m5 l5" id="generatedSearchCard">
+
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="" id="gameRandomImage" />
               </div>
+
               <div class="card-content">
                 <span
                   class="card-title activator grey-text text-darken-4"
@@ -110,6 +122,7 @@
                   <p id="card-text-generated" id="gameSearchPublisher">Publisher here</p>
                 </span>
               </div>
+
               <div class="card-reveal grey lighten-1">
                 <span class="card-title grey-text text-darken-4">
                   Card Title
@@ -122,18 +135,23 @@
                   MSRP here.
                 </p>
                 <p>Playtime here.</p>
+
                 <div class="card-action">
-                  <a class="waves-effect waves-light btn"><i class="material-icons left" id="gameHistoryID">history</i>Save Game To History</a>
+                  <a class="waves-effect waves-light btn">
+                    <i class="material-icons left" id="gameHistoryID">history</i>Save Game To History
+                  </a>
                 </div>
+                
               </div>
-            </div>
-            
+
+            </div> -->
+
         </div>
 
         <div class="gameHistory container col s10">
 <!-- Append pastGameCard to gameHistory div -->
             <div class="col s10" id="pastGameCard">
-              <div class="card horizontal deep-purple lighten-1 z-depth-4">
+              <div class="card horizontal deep-purple lighten-2 z-depth-4">
                 <div class="card-image" >
                   <img src="" id="gameRandomImage">
                 </div>
@@ -142,8 +160,9 @@
                     <p>Past Game Name</p>
                     <p>Past Game Publisher</p>
                   </div>
-                  <div class="card-action">
-                    <a class="waves-effect waves-light btn" id="pastSearchBtn"><i class="material-icons left">history</i>Show This Search</a>
+                  <div class="card-action" id="card-action-flex">
+                    <a class="waves-effect waves-light btn light-blue" id="pastSearchBtn"><i class="material-icons left">history</i>Show This Search</a>
+                    <a class="waves-effect waves-light btn red darken-2" id="pastSearchDelete"><i class="material-icons left">delete_forever</i>Delete From History</a>
                   </div>
                 </div>
               </div>
