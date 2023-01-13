@@ -87,13 +87,12 @@
       </div>
 
       <!-- This area below is for Ben -->
-      <div>
-        <div class="row">
-        <div class="row" id="lower-section">
-          <div class="gameRandom col s12 m7 l7">
+      <div id="generate-cards">
 
+        <div class="row" id="lower-section">
+<!-- Append generatedSearchCard to lower-section -->
             <!-- Section to generate -->
-            <div class="card small z-depth-4" id="generatedSearchCard">
+            <div class="card small z-depth-4 col s12 m5 l5" id="generatedSearchCard">
               <div class="card-image waves-effect waves-block waves-light">
                 <img class="activator" src="" id="gameRandomImage" />
               </div>
@@ -102,10 +101,11 @@
                   class="card-title activator grey-text text-darken-4"
                   id="gameRandomTitle"
                 >
-                  Card Title
+                  Game Title Goes here (gameSearchTitle)
+
                   <i class="material-icons right">more_vert</i>
+                  <p id="card-text-generated" id="gameSearchPublisher">Publisher here</p>
                 </span>
-                <p id="gameSearchPublisher"></p>
               </div>
               <div class="card-reveal grey lighten-1">
                 <span class="card-title grey-text text-darken-4">
@@ -113,35 +113,42 @@
                   <i class="material-icons right">close</i>
                 </span>
                 <p>
-                  Need to add description, MSRP, playtime and extra info here.
+                  Description here.
                 </p>
+                <p>
+                  MSRP here.
+                </p>
+                <p>Playtime here.</p>
+                <div class="card-action">
+                  <a class="waves-effect waves-light btn"><i class="material-icons left" id="gameHistoryID">history</i>Save Game To History</a>
+                </div>
               </div>
             </div>
 
+        </div>
+<!-- Append gameHistory to generate-cards div -->
+        <div class="gameHistory col s10">
 
-          </div>
-
-          <div class="gameHistory col s12 m5 l5">
-
-            <div class="col s12" id="pastGameCard">
+            <div class="col s10" id="pastGameCard">
               <div class="card horizontal deep-purple lighten-1 z-depth-4">
                 <div class="card-image" >
                   <img src="" id="gameRandomImage">
                 </div>
                 <div class="card-stacked">
                   <div class="card-content">
-                    <p>I am a very simple card. I am good at containing small bits of information.</p>
+                    <p>Past Game Name</p>
+                    <p>Past Game Publisher</p>
                   </div>
                   <div class="card-action">
-                    <a class="waves-effect waves-light btn"><i class="material-icons left">history</i>Show This Search</a>
+                    <a class="waves-effect waves-light btn" id="pastSearchBtn"><i class="material-icons left">history</i>Show This Search</a>
                   </div>
                 </div>
               </div>
             </div>
 
-          </div>
         </div>
-      </div>
+
+
     </div>
       </div>
     </main>
@@ -155,17 +162,3 @@
     <script src="./assets/js/script.js"></script>
   </body>
 </html>
-
-
-
-<!-- <h1 id="gameRandomTitle"></h1>
-
-<p id="gameRandomRating"></p>
-
-<p id="gameRandomReleaseDate"></p>
-
-<p id="gameRandomMsrp"></p>
-
-<p id="gameRandomPublisher"></p>
-
-<img id="gameRandomImage" /> -->
