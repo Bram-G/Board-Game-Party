@@ -3,7 +3,7 @@ let minPlayersInput = document.querySelector('#inputMin');
 let maxTimeInput = document.querySelector('#inputTime');
 let gameNameInput = document.querySelector('#gameNameInput');
 let searchButton = document.querySelector('.btn');
-let gameRandomSection = document.querySelector('#gameRandomSection');
+let lowerSection = document.querySelector('#lower-section');
 // ah-api-key = AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI
 // ah-api-key2 = AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
@@ -39,7 +39,7 @@ searchButton.addEventListener('click', (e)=> {
     }
 
     gameSearch(baseURL + endURL);
-    gameRandom(endPointAtlasRandom);
+    gameRandom(baseURL + endURL);
 });
 
 // Pulling a random game and some brief info from the Board Game Atlas API
@@ -49,12 +49,18 @@ function gameRandom(url) {
         .then (response => response.json()) 
         .then (data => {
             console.log(data)
-            document.getElementById('gameRandomTitle').textContent = "Title: " + data.games[0].name
-            document.getElementById('gameRandomImage').src = data.games[0].images.medium
-            document.getElementById('gameRandomRating').textContent = "Rating: " + data.games[0].average_user_rating
-            document.getElementById('gameRandomReleaseDate').textContent = "Release Date: " + data.games[0].year_published
-            document.getElementById('gameRandomMsrp').textContent = "MSRP: $" + data.games[0].msrp
-            document.getElementById('gameRandomPublisher').textContent = "Publisher: " + data.games[0].primary_publisher.name
+            for(let index = 1; index < 5; index++){
+                generateCards(
+                    data.games[index].name,
+                    data.games[index].images.medium
+                )
+            }
+            // document.getElementById('gameRandomTitle').textContent = "Title: " + data.games[0].name
+            // document.getElementById('gameRandomImage').src = data.games[0].images.medium
+            //document.getElementById('gameRandomRating').textContent = "Rating: " + data.games[0].average_user_rating
+            //document.getElementById('gameRandomReleaseDate').textContent = "Release Date: " + data.games[0].year_published
+            //document.getElementById('gameRandomMsrp').textContent = "MSRP: $" + data.games[0].msrp
+            //document.getElementById('gameRandomPublisher').textContent = "Publisher: " + data.games[0].primary_publisher.name
     })
 }
 
@@ -101,54 +107,73 @@ $(document).ready(function(){
     $('.materialboxed').materialbox();
   });
 
-function generateCards() {
-    
+function generateCards(gameName, gamePicture) {
+
     let outerMostDiv = genEle('div');
-    outerMostDiv.class = "card small z-depth-4";
-    outerMostDiv.id = "generatedSearchCard";
+    outerMostDiv.setAttribute("class", "card small z-depth-4 col s12 m5 l5");
+    outerMostDiv.setAttribute("id", "generatedSearchCard");
 
     let innerDiv1 = genEle('div');
-    innerDiv1.class = "card-image waves-effect waves-block waves-light";
+    innerDiv1.setAttribute("class", "card-image waves-effect waves-block waves-light");
     let img = genEle('img');
-    img.class = "activator";
-    img.src = "";
-    img.id = "gameRandomImage";
+    img.setAttribute("class", "activator");
+    img.setAttribute("src", gamePicture);
+    img.setAttribute("id", "gameRandomImage");
     innerDiv1.append(img);
 
     let innerDiv2 = genEle('div');
-    innerDiv2.class = "card-content";
+    innerDiv2.setAttribute("class", "card-content");
     let innerSpan1 = genEle('span');
-    innerSpan1.class = "card-title activator grey-text text-darken-4";
-    innerSpan1.id = "gameRandomTitle";
-    innerSpan1.textContent = "Card Title"
+    innerSpan1.setAttribute("class", "card-title activator grey-text text-darken-4");
+    innerSpan1.setAttribute("id", "gameRandomTitle");
+    innerSpan1.textContent = gameName;
     let innerI1 = genEle('i');
-    innerI1.class = "material-icons right";
+    innerI1.setAttribute("class", "material-icons right");
     innerI1.textContent = "more_vert";
     innerSpan1.append(innerI1);
     let innerPara = genEle('p');
-    innerPara.id = "gameSearchPublisher";
+    innerPara.setAttribute("id", "gameSearchPublisher");
+    innerPara.textContent = "Publisher here";
+    innerSpan1.append(innerPara);
     innerDiv2.append(innerSpan1);
-    innerDiv2.append(innerPara);
 
     let innerDiv3 = genEle('div');
-    innerDiv3.class = "card-reveal grey lighten-1";
+    innerDiv3.setAttribute("class", "card-reveal grey lighten-1");
     let innerSpan2 = genEle('span');
-    innerSpan2.class = "card-title grey-text text-darken-4";
+    innerSpan2.setAttribute("class", "card-title grey-text text-darken-4");
     innerSpan2.textContent = "Card Title";
     let innerI2 = genEle('i');
-    innerI2.class = "material-icons right";
+    innerI2.setAttribute("class", "material-icons right");
     innerI2.textContent = "close";
     innerSpan2.append(innerI2)
     let innerPara2 = genEle('p');
-    innerPara2.textContent = "Need to add description, MSRP, playtime and extra info here.";
+    innerPara2.textContent = "Description here.";
+    let innerPara3 = genEle('p');
+    innerPara3.textContent = "MRSP here."
+    let innerPara4 = genEle('p');
+    innerPara4.textContent = "Playtime here."
+    let innerMostDiv = genEle('div');
+    innerMostDiv.setAttribute("class", "card-action");
+    let innerAnchor = genEle('a');
+    innerAnchor.setAttribute("class", "waves-effect waves-light btn");
+    innerAnchor.textContent = "Save Game To History";
+    let innerMostI = genEle('i');
+    innerMostI.setAttribute("class", "material-icons left");
+    innerMostI.setAttribute("id", "gameHistoryID");
+    innerMostI.textContent = "history"
+    innerAnchor.append(innerMostI);
+    innerMostDiv.append(innerAnchor);
     innerDiv3.append(innerSpan2);
     innerDiv3.append(innerPara2);
+    innerDiv3.append(innerPara3);
+    innerDiv3.append(innerPara4);
+    innerDiv3.append(innerMostDiv);
 
     outerMostDiv.append(innerDiv1);
     outerMostDiv.append(innerDiv2);
     outerMostDiv.append(innerDiv3);
 
-    return outerMostDiv;
+    lowerSection.append(outerMostDiv)
 }
 
 function genEle(type){
