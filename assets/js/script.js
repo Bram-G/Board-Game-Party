@@ -50,7 +50,13 @@ function gameRandom(url) {
             for(let index = 1; index < 5; index++){
                 generateCards(
                     data.games[index].name,
-                    data.games[index].images.medium
+                    data.games[index].images.medium,
+                    data.games[index].primary_publisher.name,
+                    data.games[index].description_preview,
+                    data.games[index].msrp,
+                    data.games[index].min_playtime,
+                    data.games[index].max_playtime,
+                    data.games[index].id,
                 )
             }
             // document.getElementById('gameRandomTitle').textContent = "Title: " + data.games[0].name
@@ -106,7 +112,7 @@ $(document).ready(function(){
     $('.materialboxed').materialbox();
   });
 
-function generateCards(gameName, gamePicture) {
+function generateCards(gameName, gamePicture, gamePublisher, gameDescription, gameMsrp, gameMinPlaytime , gameMaxPlaytime) {
 
     let outerMostDiv = genEle('div');
     outerMostDiv.setAttribute("class", "card small z-depth-4 col s12 m5 l5");
@@ -132,7 +138,7 @@ function generateCards(gameName, gamePicture) {
     innerSpan1.append(innerI1);
     let innerPara = genEle('p');
     innerPara.setAttribute("id", "gameSearchPublisher");
-    innerPara.textContent = "Publisher here";
+    innerPara.textContent = gamePublisher
     innerSpan1.append(innerPara);
     innerDiv2.append(innerSpan1);
 
@@ -146,11 +152,11 @@ function generateCards(gameName, gamePicture) {
     innerI2.textContent = "close";
     innerSpan2.append(innerI2)
     let innerPara2 = genEle('p');
-    innerPara2.textContent = "Description here.";
+    innerPara2.textContent = gameDescription;
     let innerPara3 = genEle('p');
-    innerPara3.textContent = "MRSP here."
+    innerPara3.textContent = "MSRP: $" + gameMsrp;  
     let innerPara4 = genEle('p');
-    innerPara4.textContent = "Playtime here."
+    innerPara4.textContent = "Playtime: " + gameMinPlaytime + " - " + gameMaxPlaytime + " minutes";
     let innerMostDiv = genEle('div');
     innerMostDiv.setAttribute("class", "card-action");
     let innerAnchor = genEle('a');
@@ -188,10 +194,13 @@ function genEle(type){
 function saveGameId(data) {
   let gameName = data.games[0].name;
   let gameId = data.games[0].id;
+  let gamePublisher = data.games[0].primary_publisher.name;
   let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
   let isDuplicate = history.find(game => game.id === gameId);
   if (!isDuplicate) {
-    history.push({name: gameName, id: gameId});
+    history.push({name: gameName, id: gameId , publisher: gamePublisher});
     localStorage.setItem("searchHistory", JSON.stringify(history));;
 }
 }
+
+
