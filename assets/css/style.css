@@ -2,6 +2,19 @@ main {
     margin:5px;
 }
 
+  /* label color */
+  .input-field label {
+    color: #000;
+  }
+
+  input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid #03a9f4 ;
+    box-shadow: 0 1px 0 0 #03a9f4 ;
+  }
+
+  input[type=text]:focus:not(.browser-default).validate+label {
+    color:#03a9f4 ;
+  }
 
 #searchSubmitButton{
     display: flex;
@@ -10,22 +23,25 @@ main {
 }
 #searchInputs{
     margin: 10px;
-
 }
+
 #searchHeader{
+    margin-top:10px;
+    margin-left:3%;
+    margin-right:3%;
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.material-placeholder{
-    /* width: 300px; */
-}
+
 #search-display-picture{
     align-items: center;
     display: flex;
     justify-content: center;
-    
+    overflow:hidden;
 }
+
+
 #search-info{
     position: relative;
     text-align: center;
@@ -48,9 +64,9 @@ main {
     border: 5px solid darkslategray;
     border-radius: 5px;
 
+
 }
 #searched-links{
-    position: absolute;
     bottom: 0;
     display: flex;
     justify-content: space-between;
@@ -85,4 +101,9 @@ main {
     scale:102%;
     margin-top:-10px;
     margin-left:-10px;
+}
+
+#card-action-flex {
+    display:flex;
+    justify-content: space-between;
 }
