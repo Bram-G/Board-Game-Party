@@ -78,6 +78,8 @@ function gameSearch(url) {
       console.log(data);
       document.getElementById("gameSearchTitle").textContent =
         "Title: " + data.games[0].name;
+      document.getElementById("gameSearchDescription").textContent =
+        data.games[0].description_preview;
       document.getElementById("gameSearchImage").src =
         data.games[0].images.medium;
       document.getElementById("gameSearchRating").textContent =
