@@ -23,6 +23,13 @@ main {
     border: none;
     outline: none;
 }
+#h3-saved-games {
+    text-align: center;
+    padding-bottom: 1%;
+    margin-left:3%;
+    margin-right:3%;
+    border-bottom:1px solid black;
+}
 
 #blockquote-color {
     text-align: start;
@@ -57,7 +64,6 @@ main {
 
 
 #search-info{
-
     position: relative;
     text-align: center;
     width:100%;
@@ -96,6 +102,9 @@ main {
     margin:5px;
 }
 
+#gameSearchDescription {
+    text-align: left;
+}
 
 #card-text-generated {
     font-size:85%;
