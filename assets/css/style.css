@@ -19,7 +19,10 @@ main {
 .gameHistory {
     margin: 0 4% 0 4%;
 }
-
+#randomizer{
+    border: none;
+    outline: none;
+}
 #h3-saved-games {
     text-align: center;
     padding-bottom: 1%;
@@ -72,6 +75,7 @@ main {
 }
 
 #search-display-main{
+    background:linear-gradient(to #9575cd,gray);
     border: 3px ridge #9575cd;
     margin: 0 3% 0 3%;
     display: flex;
