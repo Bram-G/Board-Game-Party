@@ -17,26 +17,24 @@ bga api search criteria min_players= max_players= lt_max_playtime= categories=
 //gameSearch(endPointAtlasSearchTEST);
 //gameRandom(endPointAtlasRandom)
 
+searchButton.addEventListener("click", (e) => {
+  e.preventDefault();
 
+  let baseURL = "https://api.boardgameatlas.com/api/search?";
+  let endURL = "client_id=gwluPRwMeB&pretty=true";
 
-searchButton.addEventListener('click', (e)=> {
-    e.preventDefault();
-    
-    let baseURL = "https://api.boardgameatlas.com/api/search?"
-    let endURL = "client_id=gwluPRwMeB&pretty=true";
-
-    if(maxPlayersInput.value && parseInt(maxPlayersInput.value)){
-        baseURL += `max_players=${maxPlayersInput.value}&`;
-    }
-    if(minPlayersInput.value && parseInt(minPlayersInput.value)){
-        baseURL += `min_players=${minPlayersInput.value}&`;
-    }
-    if(maxTimeInput.value && parseInt(maxTimeInput.value)){
-        baseURL += `lt_max_playtime=${maxTimeInput.value}&`;
-    }
-    if(gameNameInput.value){
-        baseURL += `name=${gameNameInput.value}&`;
-    }
+  if (maxPlayersInput.value && parseInt(maxPlayersInput.value)) {
+    baseURL += `max_players=${maxPlayersInput.value}&`;
+  }
+  if (minPlayersInput.value && parseInt(minPlayersInput.value)) {
+    baseURL += `min_players=${minPlayersInput.value}&`;
+  }
+  if (maxTimeInput.value && parseInt(maxTimeInput.value)) {
+    baseURL += `lt_max_playtime=${maxTimeInput.value}&`;
+  }
+  if (gameNameInput.value) {
+    baseURL += `name=${gameNameInput.value}&`;
+  }
 
     gameSearch(baseURL + endURL);
     gameRandom(baseURL + endURL);
@@ -81,8 +79,9 @@ function gameSearch(url) {
             let gameTitle = data.games[0].name;
             let youTubeSearch = `${gameTitle} boardgame`
 
-            const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`
+            const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
             searchYoutube(endPointYoutubeSearch);
+            saveGameId(data)
 
             let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
             document.getElementById("gameAmazonSearch").href = amazonSearchLink;
@@ -183,3 +182,16 @@ function genEle(type){
 
 
 
+// function generateExtraCards()
+
+// //function to save game id and name to local storage after search
+function saveGameId(data) {
+  let gameName = data.games[0].name;
+  let gameId = data.games[0].id;
+  let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  let isDuplicate = history.find(game => game.id === gameId);
+  if (!isDuplicate) {
+    history.push({name: gameName, id: gameId});
+    localStorage.setItem("searchHistory", JSON.stringify(history));;
+}
+}
