@@ -4,7 +4,7 @@ let maxTimeInput = document.querySelector("#inputTime");
 let gameNameInput = document.querySelector("#gameNameInput");
 let searchButton = document.querySelector(".btn");
 let lowerSection = document.querySelector("#lower-section");
-let gameHistory = document.querySelector('.gameHistory');
+let gameHistory = document.querySelector(".gameHistory");
 // ah-api-key = AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI
 // ah-api-key2 = AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
@@ -40,7 +40,7 @@ searchButton.addEventListener("click", (e) => {
   gameSearch(baseURL + endURL);
   gameRandom(baseURL + endURL);
 
-    generatePastGameCard();
+  generatePastGameCard();
 });
 
 // Pulling a random game and some brief info from the Board Game Atlas API
@@ -78,6 +78,8 @@ function gameSearch(url) {
       console.log(data);
       document.getElementById("gameSearchTitle").textContent =
         "Title: " + data.games[0].name;
+      document.getElementById("gameSearchDescription").textContent =
+        data.games[0].description_preview;
       document.getElementById("gameSearchImage").src =
         data.games[0].images.medium;
       document.getElementById("gameSearchRating").textContent =
@@ -172,12 +174,13 @@ function generateCards(
   innerDiv3.setAttribute("class", "card-reveal grey lighten-1");
   let innerSpan2 = genEle("span");
   innerSpan2.setAttribute("class", "card-title grey-text text-darken-4");
-  innerSpan2.textContent = "Card Title";
+  innerSpan2.textContent = gameName;
   let innerI2 = genEle("i");
   innerI2.setAttribute("class", "material-icons right");
   innerI2.textContent = "close";
   innerSpan2.append(innerI2);
   let innerPara2 = genEle("p");
+  innerPara2.setAttribute("id", "card-reveal-description");
   innerPara2.textContent = gameDescription;
   let innerPara3 = genEle("p");
   innerPara3.textContent = "MSRP: $" + gameMsrp;
@@ -208,128 +211,132 @@ function generateCards(
   lowerSection.append(outerMostDiv);
 }
 
+function generatePastGameCard() {
+  let div_1 = genEle("div");
+  div_1.setAttribute("class", "col s10 m6");
+  div_1.setAttribute("id", "pastGameCard");
 
-function generatePastGameCard(){
-    let div_1 = genEle('div');
-    div_1.setAttribute("class", "col s10");
-    div_1.setAttribute("id", "pastGameCard");
+  let div_2 = genEle("div");
+  div_1.append(div_2);
+  div_2.setAttribute(
+    "class",
+    "card horizontal deep-purple lighten-2 z-depth-4"
+  );
 
-    let div_2 = genEle('div');
-    div_1.append(div_2);
-    div_2.setAttribute("class", "card horizontal deep-purple lighten-2 z-depth-4")
+  let div_2_1 = genEle("div");
+  div_2.append(div_2_1);
+  div_2_1.setAttribute("class", "card-image");
+  let img = genEle("img");
+  img.setAttribute("src", "");
+  img.setAttribute("id", "gameRandomImage");
+  div_2_1.append(img);
 
-    let div_2_1 = genEle('div');
-    div_2.append(div_2_1);
-    div_2_1.setAttribute("class", "card-image");
-    let img = genEle('img');
-    img.setAttribute("src", "");
-    img.setAttribute("id", "gameRandomImage");
-    div_2_1.append(img);
+  let div_2_2 = genEle("div");
+  div_2.append(div_2_2);
+  div_2_2.setAttribute("class", "card-stacked");
 
-    let div_2_2 = genEle('div');
-    div_2.append(div_2_2);
-    div_2_2.setAttribute("class", "card-stacked");
+  let div_2_2_1 = genEle("div");
+  div_2_2_1.setAttribute("class", "card-content");
+  let p1 = genEle("p");
+  p1.textContent = "Past Game Name";
+  let p2 = genEle("p");
+  p2.textContent = "Past Game Publisher";
+  div_2_2_1.append(p1);
+  div_2_2_1.append(p2);
+  div_2_2.append(div_2_2_1);
 
-    let div_2_2_1 = genEle('div');
-    div_2_2_1.setAttribute("class", "card-content");
-    let p1 = genEle('p');
-    p1.textContent = "Past Game Name"
-    let p2 = genEle('p');
-    p2.textContent = "Past Game Publisher"
-    div_2_2_1.append(p1);
-    div_2_2_1.append(p2);
-    div_2_2.append(div_2_2_1);
+  let div_2_2_2 = genEle("div");
+  div_2_2_2.setAttribute("class", "card-action");
+  div_2_2_2.setAttribute("id", "card-action-flex");
+  let a1 = genEle("a");
+  a1.setAttribute("class", "waves-effect waves-light btn light-blue");
+  a1.setAttribute("id", "pastSearchBtn");
+  a1.textContent = "Show This Search";
+  let i1 = genEle("i");
+  i1.setAttribute("class", "material-icons left");
+  i1.textContent = "history";
+  a1.append(i1);
+  div_2_2_2.append(a1);
 
-    let div_2_2_2 = genEle('div');
-    div_2_2_2.setAttribute("class", "card-action");
-    div_2_2_2.setAttribute("id", "card-action-flex");
-    let a1 = genEle('a');
-    a1.setAttribute("class", "waves-effect waves-light btn light-blue");
-    a1.setAttribute("id", "pastSearchBtn")
-    a1.textContent = "Show This Search";
-    let i1 = genEle('i')
-    i1.setAttribute("class", "material-icons left");
-    i1.textContent = "history";
-    a1.append(i1);
-    div_2_2_2.append(a1);
+  let a2 = genEle("a");
+  a2.setAttribute("class", "waves-effect waves-light btn red darken-2");
+  a2.setAttribute("id", "pastSearchDelete");
+  a2.textContent = "Delete From History";
+  let i2 = genEle("i");
+  i2.setAttribute("class", "material-icons right");
+  i2.textContent = "delete_forever";
+  a2.append(i2);
+  div_2_2_2.append(a2);
+  div_2_2.append(div_2_2_2);
 
-    let a2 = genEle('a');
-    a2.setAttribute("class", "waves-effect waves-light btn red darken-2");
-    a2.setAttribute("id", "pastSearchDelete");
-    a2.textContent = "Delete From History";
-    let i2 = genEle('i');
-    i2.setAttribute("class", "material-icons right");
-    i2.textContent = "delete_forever";
-    a2.append(i2);
-    div_2_2_2.append(a2);
-    div_2_2.append(div_2_2_2);
-
-    gameHistory.prepend(div_1);
+  gameHistory.prepend(div_1);
 }
 
+function generatePastGameCard() {
+  let div_1 = genEle("div");
+  div_1.setAttribute("class", "col s10");
+  div_1.setAttribute("id", "pastGameCard");
 
-function generatePastGameCard(){
-    let div_1 = genEle('div');
-    div_1.setAttribute("class", "col s10");
-    div_1.setAttribute("id", "pastGameCard");
+  let div_2 = genEle("div");
+  div_1.append(div_2);
+  div_2.setAttribute(
+    "class",
+    "card horizontal deep-purple lighten-2 z-depth-4"
+  );
 
-    let div_2 = genEle('div');
-    div_1.append(div_2);
-    div_2.setAttribute("class", "card horizontal deep-purple lighten-2 z-depth-4")
+  let div_2_1 = genEle("div");
+  div_2.append(div_2_1);
+  div_2_1.setAttribute("class", "card-image");
+  let img = genEle("img");
+  img.setAttribute("src", "");
+  img.setAttribute("id", "gameRandomImage");
+  div_2_1.append(img);
 
-    let div_2_1 = genEle('div');
-    div_2.append(div_2_1);
-    div_2_1.setAttribute("class", "card-image");
-    let img = genEle('img');
-    img.setAttribute("src", "");
-    img.setAttribute("id", "gameRandomImage");
-    div_2_1.append(img);
+  let div_2_2 = genEle("div");
+  div_2.append(div_2_2);
+  div_2_2.setAttribute("class", "card-stacked");
 
-    let div_2_2 = genEle('div');
-    div_2.append(div_2_2);
-    div_2_2.setAttribute("class", "card-stacked");
+  let div_2_2_1 = genEle("div");
+  div_2_2_1.setAttribute("class", "card-content");
+  let p1 = genEle("p");
+  p1.textContent = "Past Game Name";
+  let p2 = genEle("p");
+  p2.textContent = "Past Game Publisher";
+  div_2_2_1.append(p1);
+  div_2_2_1.append(p2);
+  div_2_2.append(div_2_2_1);
 
-    let div_2_2_1 = genEle('div');
-    div_2_2_1.setAttribute("class", "card-content");
-    let p1 = genEle('p');
-    p1.textContent = "Past Game Name"
-    let p2 = genEle('p');
-    p2.textContent = "Past Game Publisher"
-    div_2_2_1.append(p1);
-    div_2_2_1.append(p2);
-    div_2_2.append(div_2_2_1);
+  let div_2_2_2 = genEle("div");
+  div_2_2_2.setAttribute("class", "card-action");
+  div_2_2_2.setAttribute("id", "card-action-flex");
+  let a1 = genEle("a");
+  a1.setAttribute("class", "waves-effect waves-light btn light-blue");
+  a1.setAttribute("id", "pastSearchBtn");
+  a1.textContent = "Show This Search";
+  let i1 = genEle("i");
+  i1.setAttribute("class", "material-icons left");
+  i1.textContent = "history";
+  a1.append(i1);
+  div_2_2_2.append(a1);
 
-    let div_2_2_2 = genEle('div');
-    div_2_2_2.setAttribute("class", "card-action");
-    div_2_2_2.setAttribute("id", "card-action-flex");
-    let a1 = genEle('a');
-    a1.setAttribute("class", "waves-effect waves-light btn light-blue");
-    a1.setAttribute("id", "pastSearchBtn")
-    a1.textContent = "Show This Search";
-    let i1 = genEle('i')
-    i1.setAttribute("class", "material-icons left");
-    i1.textContent = "history";
-    a1.append(i1);
-    div_2_2_2.append(a1);
+  let a2 = genEle("a");
+  a2.setAttribute("class", "waves-effect waves-light btn red darken-2");
+  a2.setAttribute("id", "pastSearchDelete");
+  a2.textContent = "Delete From History";
+  let i2 = genEle("i");
+  i2.setAttribute("class", "material-icons right");
+  i2.textContent = "delete_forever";
+  a2.append(i2);
+  div_2_2_2.append(a2);
+  div_2_2.append(div_2_2_2);
 
-    let a2 = genEle('a');
-    a2.setAttribute("class", "waves-effect waves-light btn red darken-2");
-    a2.setAttribute("id", "pastSearchDelete");
-    a2.textContent = "Delete From History";
-    let i2 = genEle('i');
-    i2.setAttribute("class", "material-icons right");
-    i2.textContent = "delete_forever";
-    a2.append(i2);
-    div_2_2_2.append(a2);
-    div_2_2.append(div_2_2_2);
-
-    gameHistory.prepend(div_1);
+  gameHistory.prepend(div_1);
 }
 
 function genEle(type) {
   return document.createElement(type);
 }
-        
+
 // //function to save game id and name to local storage after search
 function saveGameId(data) {
   let gameName = data.games[0].name;
