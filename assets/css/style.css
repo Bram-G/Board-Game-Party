@@ -129,6 +129,12 @@ main {
     justify-content: space-between;
 }
 
+#footer-flex {
+    display:flex;
+    justify-content: space-between;
+    padding: 0 0.5% 0 0.5%;
+}
+
 @media screen and ( max-width:800px) {
 
 
