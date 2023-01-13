@@ -91,6 +91,10 @@ main {
     color:gray;
 }
 
+#card-reveal-description {
+    text-overflow:ellipsis;
+    max-height:400px;
+}
 
 #lower-section img {
     transition:margin 0.7s ease-in-out;

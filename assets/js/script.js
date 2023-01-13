@@ -175,6 +175,7 @@ function generateCards(
   innerI2.textContent = "close";
   innerSpan2.append(innerI2);
   let innerPara2 = genEle("p");
+  innerPara2.setAttribute("id", "card-reveal-description");
   innerPara2.textContent = gameDescription;
   let innerPara3 = genEle("p");
   innerPara3.textContent = "MSRP: $" + gameMsrp;
