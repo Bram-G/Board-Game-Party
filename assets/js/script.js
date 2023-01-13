@@ -35,7 +35,7 @@ searchButton.addEventListener("click", (e) => {
     baseURL += `name=${gameNameInput.value}&`;
   }
 
-  gameSearch(baseURL + endURL);
+  gameSearch(baseURL + endURL)
   gameRandom(endPointAtlasRandom);
 });
 
@@ -84,6 +84,7 @@ function gameSearch(url) {
 
       const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
       searchYoutube(endPointYoutubeSearch);
+      saveGameId(data)
 
       let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
       document.getElementById("gameAmazonSearch").href = amazonSearchLink;
@@ -114,3 +115,15 @@ $(document).ready(function () {
 });
 
 // function generateExtraCards()
+
+// //function to save game id and name to local storage after search
+function saveGameId(data) {
+  let gameName = data.games[0].name;
+  let gameId = data.games[0].id;
+  let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+  let isDuplicate = history.find(game => game.id === gameId);
+  if (!isDuplicate) {
+    history.push({name: gameName, id: gameId});
+    localStorage.setItem("searchHistory", JSON.stringify(history));;
+}
+}
