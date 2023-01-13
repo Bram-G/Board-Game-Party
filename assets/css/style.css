@@ -19,7 +19,17 @@ main {
 .gameHistory {
     margin: 0 4% 0 4%;
 }
-
+#randomizer{
+    border: none;
+    outline: none;
+}
+#h3-saved-games {
+    text-align: center;
+    padding-bottom: 1%;
+    margin-left:3%;
+    margin-right:3%;
+    border-bottom:1px solid black;
+}
 
 #blockquote-color {
     text-align: start;
@@ -36,11 +46,6 @@ main {
 }
 
 #searchHeader{
-    background-image: url("https://img.freepik.com/free-photo/white-paper-texture_1194-2324.jpg?w=1380&t=st=1673643918~exp=1673644518~hmac=96aec622444658c4de801b194fdba2fabb21c8b0d4dce6377fbb4f567f1330f9");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: 3px double #9575cd;
     margin-top:10px;
     margin-left:3%;
     margin-right:3%;
@@ -59,11 +64,6 @@ main {
 
 
 #search-info{
-    background-image: url("https://img.freepik.com/free-photo/white-paper-texture_1194-2324.jpg?w=1380&t=st=1673643918~exp=1673644518~hmac=96aec622444658c4de801b194fdba2fabb21c8b0d4dce6377fbb4f567f1330f9");
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    border: 3px double #9575cd;
     position: relative;
     text-align: center;
     width:100%;
@@ -75,6 +75,7 @@ main {
 }
 
 #search-display-main{
+    background:linear-gradient(to #9575cd,gray);
     border: 3px ridge #9575cd;
     margin: 0 3% 0 3%;
     display: flex;
@@ -130,6 +131,12 @@ main {
 #card-action-flex {
     display:flex;
     justify-content: space-between;
+}
+
+#footer-flex {
+    display:flex;
+    justify-content: space-between;
+    padding: 0 0.5% 0 0.5%;
 }
 
 @media screen and ( max-width:800px) {
