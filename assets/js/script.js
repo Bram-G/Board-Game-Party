@@ -96,13 +96,21 @@ function gameSearch(url) {
 
       const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
       searchYoutube(endPointYoutubeSearch);
-      saveGameId(data);
+      
 
       let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
       document.getElementById("gameAmazonSearch").href = amazonSearchLink;
       document.getElementById("gameAmazonSearch").textContent =
         "Search on Amazon";
-    });
+
+
+      document.getElementById("gameHistoryID").addEventListener("click", function(){
+
+      saveGameId(data)
+        
+      });
+    }
+  );
 }
 
 function searchYoutube(url) {
@@ -359,3 +367,13 @@ function saveGameId(data) {
     localStorage.setItem("searchHistory", JSON.stringify(history));
   }
 }
+
+
+document.getElementById("lower-section").addEventListener("click", function(event) {
+  if (event.target.matches("#gameHistoryID")) {
+    var card = event.target.closest(".card");
+    var item = card.querySelector("#gameRandomTitle").textContent;
+    localStorage.setItem("savedItem", item);
+  }
+});
+
