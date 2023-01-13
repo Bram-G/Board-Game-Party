@@ -54,7 +54,6 @@ function gameRandom(url) {
           data.games[index].name,
           data.games[index].images.medium,
           data.games[index].primary_publisher.name,
-          data.games[index].description_preview,
           data.games[index].msrp,
           data.games[index].min_playtime,
           data.games[index].max_playtime,
@@ -139,11 +138,14 @@ function generateCards(
   gameName,
   gamePicture,
   gamePublisher,
-  gameDescription,
   gameMsrp,
   gameMinPlaytime,
-  gameMaxPlaytime
+  gameMaxPlaytime,
+  gameId
 ) {
+
+
+
   let outerMostDiv = genEle("div");
   outerMostDiv.setAttribute("class", "card small z-depth-4 col s12 m5 l5");
   outerMostDiv.setAttribute("id", "generatedSearchCard");
@@ -199,7 +201,8 @@ function generateCards(
   innerMostDiv.setAttribute("class", "card-action");
   innerMostDiv.setAttribute("id", "card-action-flex");
   let innerAnchor = genEle("a");
-  innerAnchor.setAttribute("class", "waves-effect waves-light btn light-blue");
+  innerAnchor.setAttribute("class", "waves-effect waves-light btn light-blue")
+  innerAnchor.setAttribute("id", "gameCardHistoryID");
   innerAnchor.textContent = "Save Game To History";
   let innerMostI = genEle("i");
   innerMostI.setAttribute("class", "material-icons left");
@@ -227,6 +230,19 @@ function generateCards(
   outerMostDiv.append(innerDiv3);
 
   lowerSection.append(outerMostDiv);
+
+innerAnchor.setAttribute("data-gameName", gameName);
+innerAnchor.setAttribute("data-gamePublisher", gamePublisher);
+innerAnchor.setAttribute("data-gameId", gameId);
+
+innerAnchor.addEventListener("click", function(){
+  var gameName = this.getAttribute("data-gameName");
+  var gamePublisher = this.getAttribute("data-gamePublisher");
+  var gameId = this.getAttribute("data-gameId");
+  localStorage.setItem("savedItem", JSON.stringify({ name: gameName, id: gameId, publisher: gamePublisher }));
+});
+
+
 }
 
 function generatePastGameCard() {
@@ -370,10 +386,17 @@ function saveGameId(data) {
 
 
 document.getElementById("lower-section").addEventListener("click", function(event) {
-  if (event.target.matches("#gameHistoryID")) {
-    var card = event.target.closest(".card");
-    var item = card.querySelector("#gameRandomTitle").textContent;
-    localStorage.setItem("savedItem", item);
+  if (event.target.matches("#gameCardHistoryID")) {
+   
+    var gameName = event.target.getAttribute("data-gameName");
+    var gamePublisher = event.target.getAttribute("data-gamePublisher");
+    var gameId = event.target.getAttribute("data-gameId");
+    let  history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+    let isDuplicate = history.find((game) => game.id === gameId);
+    if (!isDuplicate) {
+      history.push({ name: gameName, id: gameId, publisher: gamePublisher });
+      localStorage.setItem("searchHistory", JSON.stringify(history));
   }
-});
+}}
+);
 
