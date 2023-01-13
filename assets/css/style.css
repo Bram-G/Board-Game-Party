@@ -101,6 +101,9 @@ main {
     margin:5px;
 }
 
+#gameSearchDescription {
+    text-align: left;
+}
 
 #card-text-generated {
     font-size:85%;
