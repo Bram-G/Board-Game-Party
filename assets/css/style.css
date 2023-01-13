@@ -16,6 +16,11 @@ main {
     color:#03a9f4 ;
   }
 
+
+#blockquote-color {
+  border-left: 2px solid #03a9f4;
+}
+ 
 #searchSubmitButton{
     display: flex;
     justify-content: center;
@@ -45,16 +50,18 @@ main {
 #search-info{
     position: relative;
     text-align: center;
-    margin: 10px 3% 10px 3%;
-    border:5px solid darkslategray;
+    width:75%;
+    margin: 1% 0 1% 0;
     border-radius: 5px;
-    /* display: flex; */
-}
-#search-display-main{
-    border: 5px groove #9575cd;
-    margin: 0px 10px 0px 10px;
     display: flex;
-    background-color: grey;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+#search-display-main{
+    border: 3px ridge #9575cd;
+    margin: 0 3% 0 3%;
+    display: flex;
 }
 #gameSearchTitle{
     text-align: center;
@@ -69,7 +76,9 @@ main {
 }
 #searched-links{
     display: flex;
-    justify-content: space-between;
+    width:100%;
+    justify-content: space-evenly;
+    margin-bottom:1%;
 }
 
 
@@ -89,6 +98,10 @@ main {
     color:gray;
 }
 
+#card-reveal-description {
+    text-overflow:ellipsis;
+    max-height:400px;
+}
 
 #lower-section img {
     transition:margin 0.7s ease-in-out;
@@ -104,4 +117,19 @@ main {
 #card-action-flex {
     display:flex;
     justify-content: space-between;
+}
+
+@media screen and ( max-width:800px) {
+
+
+    #search-display-main {
+        flex-direction:column;
+        justify-content: center;
+    }
+
+    #search-display-picture {
+        align-items:center;
+        justify-content: center;
+    }
+
 }
