@@ -25,7 +25,7 @@
     <header>
 
       <nav>
-        <div class="nav-wrapper blue lighten-1">
+        <div class="nav-wrapper blue lighten-1" id="nav-responsive">
           <a class="brand-logo">Board Game Party</a>
           <ul id="nav-mobile" class="right hide-on-med-and-down">
             <li><a href="https://github.com/Bram-G/Board-Game-Party" target="_blank">Github Repository</a></li>
@@ -72,12 +72,11 @@
 
         <div class="gameSearch z-depth-4 grey lighten-1" id="search-display-main">
           <div class="col s4" id="search-display-picture">
-            <img class="materialboxed" width="100%" height="299px" id="gameSearchImage" />
+            <img class="materialboxed responsive-img" width="100%" height="299px" id="gameSearchImage" />
           </div>
           <div class="col s8 z-depth-3 grey-lighten-2" id="search-info">
             <h1 id="gameSearchTitle"></h1>
             <blockquote id="blockquote-color">
-            <p id="gameSearchDescription"></p>
 
             <p id="gameSearchRating"></p>
             
@@ -87,6 +86,7 @@
             
             <p id="gameSearchPublisher"></p>
           </blockquote>
+          <p id="gameSearchDescription"></p>
           <p id="gameSearchDescription"></p>
             <div class="flow-text" id="searched-links">
               <a id="gameAmazonSearch" target="_blank">Amazon Link</a>
@@ -154,7 +154,7 @@
 <div id="history-section">
   <h3>History</h3>
 </div>
-        <div class="gameHistory container col s10">
+        <div class="gameHistory col s10">
 <!-- Append pastGameCard to gameHistory div -->
             <!-- <div class="col s10" id="pastGameCard">
               <div class="card horizontal deep-purple lighten-1 z-depth-4">

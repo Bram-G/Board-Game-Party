@@ -16,8 +16,13 @@ main {
     color:#03a9f4 ;
   }
 
+.gameHistory {
+    margin: 0 4% 0 4%;
+}
+
 
 #blockquote-color {
+    text-align: start;
   border-left: 2px solid #03a9f4;
 }
  
@@ -31,6 +36,11 @@ main {
 }
 
 #searchHeader{
+    background-image: url("https://img.freepik.com/free-photo/white-paper-texture_1194-2324.jpg?w=1380&t=st=1673643918~exp=1673644518~hmac=96aec622444658c4de801b194fdba2fabb21c8b0d4dce6377fbb4f567f1330f9");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 3px double #9575cd;
     margin-top:10px;
     margin-left:3%;
     margin-right:3%;
@@ -44,13 +54,19 @@ main {
     display: flex;
     justify-content: center;
     overflow:hidden;
+    margin: 0 1% 0 1%;
 }
 
 
 #search-info{
+    background-image: url("https://img.freepik.com/free-photo/white-paper-texture_1194-2324.jpg?w=1380&t=st=1673643918~exp=1673644518~hmac=96aec622444658c4de801b194fdba2fabb21c8b0d4dce6377fbb4f567f1330f9");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 3px double #9575cd;
     position: relative;
     text-align: center;
-    width:75%;
+    width:100%;
     margin: 1% 0 1% 0;
     border-radius: 5px;
     display: flex;
@@ -62,25 +78,18 @@ main {
     border: 3px ridge #9575cd;
     margin: 0 3% 0 3%;
     display: flex;
+    overflow:hidden;
 }
 #gameSearchTitle{
     text-align: center;
-
 }
-#gameSearchImage{
-    display: flex;
-    border: 5px solid darkslategray;
-    border-radius: 5px;
 
-
-}
 #searched-links{
     display: flex;
     width:100%;
     justify-content: space-evenly;
     margin-bottom:1%;
 }
-
 
 #lower-section {
     display:flex;
@@ -108,7 +117,8 @@ main {
     transition:all 1s;
 }
 
-#lower-section img:hover {
+#lower-section img:hover,
+#lower-section img:focus {
     scale:102%;
     margin-top:-10px;
     margin-left:-10px;
@@ -128,8 +138,46 @@ main {
     }
 
     #search-display-picture {
+        margin:0;
+        width:100%;
         align-items:center;
         justify-content: center;
     }
 
+    #search-info {
+        position:relative;
+        left:5%;
+        width:90%;
+        justify-content: center;
+    }
+
+}
+
+@media screen and ( max-width:800px) {
+    #searched-links {
+        flex-direction:column;
+    }
+}
+
+@media screen and (max-width:550px) {
+    #nav-responsive a {
+        display: flex;
+        width:100%;
+        justify-content: center;
+    }
+
+    input[type=text]:not(.browser-default):not([readonly]) {
+        padding-bottom:38%;
+    }
+}
+
+@media screen and (max-width:400px) {
+
+    #searchHeader {
+        flex-wrap:wrap;
+    }
+
+    #inputFields {
+        width:50%;
+    }
 }
