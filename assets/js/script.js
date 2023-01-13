@@ -101,8 +101,8 @@ $(document).ready(function(){
     $('.materialboxed').materialbox();
   });
 
-
 function generateCards() {
+    
     let outerMostDiv = genEle('div');
     outerMostDiv.class = "card small z-depth-4";
     outerMostDiv.id = "generatedSearchCard";
@@ -154,7 +154,6 @@ function generateCards() {
 function genEle(type){
     return document.createElement(type);
 }
-
         
 
 
