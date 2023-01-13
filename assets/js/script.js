@@ -172,12 +172,13 @@ function generateCards(
   innerDiv3.setAttribute("class", "card-reveal grey lighten-1");
   let innerSpan2 = genEle("span");
   innerSpan2.setAttribute("class", "card-title grey-text text-darken-4");
-  innerSpan2.textContent = "Card Title";
+  innerSpan2.textContent = gameName;
   let innerI2 = genEle("i");
   innerI2.setAttribute("class", "material-icons right");
   innerI2.textContent = "close";
   innerSpan2.append(innerI2);
   let innerPara2 = genEle("p");
+  innerPara2.setAttribute("id", "card-reveal-description");
   innerPara2.textContent = gameDescription;
   let innerPara3 = genEle("p");
   innerPara3.textContent = "MSRP: $" + gameMsrp;
