@@ -288,9 +288,6 @@ function generatePastGameCard(gameImage, gameName, gamePublisher){
     gameHistory.prepend(div_1);
 }
 
-
-
-
 function genEle(type) {
   return document.createElement(type);
 }
