@@ -45,13 +45,13 @@ main {
 #search-info{
     position: relative;
     text-align: center;
-    margin: 10px;
+    margin: 10px 3% 10px 3%;
     border:5px solid darkslategray;
     border-radius: 5px;
     /* display: flex; */
 }
 #search-display-main{
-    border: 5px groove blueviolet;
+    border: 5px groove #9575cd;
     margin: 0px 10px 0px 10px;
     display: flex;
     background-color: grey;
@@ -61,17 +61,15 @@ main {
 
 }
 #gameSearchImage{
+    display: flex;
     border: 5px solid darkslategray;
     border-radius: 5px;
 
 
 }
 #searched-links{
-    bottom: 0;
     display: flex;
     justify-content: space-between;
-
-
 }
 
 
