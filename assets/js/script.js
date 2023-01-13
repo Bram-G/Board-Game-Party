@@ -1,14 +1,15 @@
-let maxPlayersInput = document.querySelector("#inputMax");
-let minPlayersInput = document.querySelector("#inputMin");
-let maxTimeInput = document.querySelector("#inputTime");
-let gameNameInput = document.querySelector("#gameNameInput");
-let searchButton = document.querySelector(".btn");
+let maxPlayersInput = document.querySelector('#inputMax');
+let minPlayersInput = document.querySelector('#inputMin');
+let maxTimeInput = document.querySelector('#inputTime');
+let gameNameInput = document.querySelector('#gameNameInput');
+let searchButton = document.querySelector('.btn');
+let gameRandomSection = document.querySelector('#gameRandomSection');
 // ah-api-key = AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI
 // ah-api-key2 = AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
-const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`;
-const endPointAtlasSearch = `https://api.boardgameatlas.com/api/search?name=catan&client_id=gwluPRwMeB&pretty=true`;
-const YT_API_KEY = "AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM";
+const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`
+const endPointAtlasSearch = `https://api.boardgameatlas.com/api/search?name=catan&client_id=gwluPRwMeB&pretty=true`
+const YT_API_KEY = 'AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM'
 /*
 bga api search criteria min_players= max_players= lt_max_playtime= categories=
 */
@@ -16,101 +17,145 @@ bga api search criteria min_players= max_players= lt_max_playtime= categories=
 //gameSearch(endPointAtlasSearchTEST);
 //gameRandom(endPointAtlasRandom)
 
-searchButton.addEventListener("click", (e) => {
-  e.preventDefault();
 
-  let baseURL = "https://api.boardgameatlas.com/api/search?";
-  let endURL = "client_id=gwluPRwMeB&pretty=true";
 
-  if (maxPlayersInput.value && parseInt(maxPlayersInput.value)) {
-    baseURL += `max_players=${maxPlayersInput.value}&`;
-  }
-  if (minPlayersInput.value && parseInt(minPlayersInput.value)) {
-    baseURL += `min_players=${minPlayersInput.value}&`;
-  }
-  if (maxTimeInput.value && parseInt(maxTimeInput.value)) {
-    baseURL += `lt_max_playtime=${maxTimeInput.value}&`;
-  }
-  if (gameNameInput.value) {
-    baseURL += `name=${gameNameInput.value}&`;
-  }
+searchButton.addEventListener('click', (e)=> {
+    e.preventDefault();
+    
+    let baseURL = "https://api.boardgameatlas.com/api/search?"
+    let endURL = "client_id=gwluPRwMeB&pretty=true";
 
-  gameSearch(baseURL + endURL);
-  gameRandom(endPointAtlasRandom);
+    if(maxPlayersInput.value && parseInt(maxPlayersInput.value)){
+        baseURL += `max_players=${maxPlayersInput.value}&`;
+    }
+    if(minPlayersInput.value && parseInt(minPlayersInput.value)){
+        baseURL += `min_players=${minPlayersInput.value}&`;
+    }
+    if(maxTimeInput.value && parseInt(maxTimeInput.value)){
+        baseURL += `lt_max_playtime=${maxTimeInput.value}&`;
+    }
+    if(gameNameInput.value){
+        baseURL += `name=${gameNameInput.value}&`;
+    }
+
+    gameSearch(baseURL + endURL);
+    gameRandom(endPointAtlasRandom);
 });
 
 // Pulling a random game and some brief info from the Board Game Atlas API
 function gameRandom(url) {
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      document.getElementById("gameRandomTitle").textContent =
-        "Title: " + data.games[0].name;
-      document.getElementById("gameRandomImage").src =
-        data.games[0].images.large;
-      document.getElementById("gameRandomRating").textContent =
-        "Rating: " + data.games[0].average_user_rating;
-      document.getElementById("gameRandomReleaseDate").textContent =
-        "Release Date: " + data.games[0].year_published;
-      document.getElementById("gameRandomMsrp").textContent =
-        "MSRP: $" + data.games[0].msrp;
-      document.getElementById("gameRandomPublisher").textContent =
-        "Publisher: " + data.games[0].primary_publisher.name;
-    });
+
+    fetch(url) 
+        .then (response => response.json()) 
+        .then (data => {
+            console.log(data)
+            document.getElementById('gameRandomTitle').textContent = "Title: " + data.games[0].name
+            document.getElementById('gameRandomImage').src = data.games[0].images.medium
+            document.getElementById('gameRandomRating').textContent = "Rating: " + data.games[0].average_user_rating
+            document.getElementById('gameRandomReleaseDate').textContent = "Release Date: " + data.games[0].year_published
+            document.getElementById('gameRandomMsrp').textContent = "MSRP: $" + data.games[0].msrp
+            document.getElementById('gameRandomPublisher').textContent = "Publisher: " + data.games[0].primary_publisher.name
+    })
 }
 
 // results for game that user SEARCHES for in the search bar and clicks submit
 function gameSearch(url) {
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      document.getElementById("gameSearchTitle").textContent =
-        "Title: " + data.games[0].name;
-      document.getElementById("gameSearchImage").src =
-        data.games[0].images.small;
-      document.getElementById("gameSearchRating").textContent =
-        "Rating: " + data.games[0].average_user_rating;
-      document.getElementById("gameSearchReleaseDate").textContent =
-        "Release Date: " + data.games[0].year_published;
-      document.getElementById("gameSearchMsrp").textContent =
-        "MSRP: $" + data.games[0].msrp;
-      document.getElementById("gameSearchPublisher").textContent =
-        "Publisher: " + data.games[0].primary_publisher.name;
 
-      let gameTitle = data.games[0].name;
-      let youTubeSearch = `${gameTitle} boardgame`;
+     fetch(url) 
+        .then (response => response.json()) 
+        .then (data => {
+            console.log(data)
+            document.getElementById('gameSearchTitle').textContent = "Title: " + data.games[0].name
+            document.getElementById('gameSearchImage').src = data.games[0].images.medium
+            document.getElementById('gameSearchRating').textContent = "Rating: " + data.games[0].average_user_rating
+            document.getElementById('gameSearchReleaseDate').textContent = "Release Date: " + data.games[0].year_published
+            document.getElementById('gameSearchMsrp').textContent = "MSRP: $" + data.games[0].msrp
+            document.getElementById('gameSearchPublisher').textContent = "Publisher: " + data.games[0].primary_publisher.name
 
-      const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
-      searchYoutube(endPointYoutubeSearch);
+            let gameTitle = data.games[0].name;
+            let youTubeSearch = `${gameTitle} boardgame`
 
-      let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
-      document.getElementById("gameAmazonSearch").href = amazonSearchLink;
-      document.getElementById("gameAmazonSearch").textContent =
-        "Search on Amazon";
-    });
+            const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`
+            searchYoutube(endPointYoutubeSearch);
+
+            let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
+            document.getElementById("gameAmazonSearch").href = amazonSearchLink;
+            document.getElementById("gameAmazonSearch").textContent = "Search on Amazon";
+    })
 }
 
 function searchYoutube(url) {
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-      document.getElementById(
-        "gameYoutubeSearch1"
-      ).href = `https://www.youtube.com/watch?v=${data.items[0].id.videoId}`;
-      document.getElementById("gameYoutubeSearch1").textContent =
-        data.items[0].snippet.title;
-      document.getElementById(
-        "gameYoutubeSearch2"
-      ).href = `https://www.youtube.com/watch?v=${data.items[1].id.videoId}`;
-      document.getElementById("gameYoutubeSearch2").textContent =
-        data.items[1].snippet.title;
-    });
-}
-$(document).ready(function () {
-  $(".materialboxed").materialbox();
-});
+    fetch(url)
+        .then (response => response.json())
+        .then (data => {
+            console.log(data);
+            document.getElementById("gameYoutubeSearch1").href = `https://www.youtube.com/watch?v=${data.items[0].id.videoId}`;
+            document.getElementById("gameYoutubeSearch1").textContent = data.items[0].snippet.title;
+            document.getElementById("gameYoutubeSearch2").href = `https://www.youtube.com/watch?v=${data.items[1].id.videoId}`;
+            document.getElementById("gameYoutubeSearch2").textContent = data.items[1].snippet.title;
 
-// function generateExtraCards()
+        })
+}
+
+$(document).ready(function(){
+    $('.materialboxed').materialbox();
+  });
+
+
+function generateCards() {
+    let outerMostDiv = genEle('div');
+    outerMostDiv.class = "card small z-depth-4";
+    outerMostDiv.id = "generatedSearchCard";
+
+    let innerDiv1 = genEle('div');
+    innerDiv1.class = "card-image waves-effect waves-block waves-light";
+    let img = genEle('img');
+    img.class = "activator";
+    img.src = "";
+    img.id = "gameRandomImage";
+    innerDiv1.append(img);
+
+    let innerDiv2 = genEle('div');
+    innerDiv2.class = "card-content";
+    let innerSpan1 = genEle('span');
+    innerSpan1.class = "card-title activator grey-text text-darken-4";
+    innerSpan1.id = "gameRandomTitle";
+    innerSpan1.textContent = "Card Title"
+    let innerI1 = genEle('i');
+    innerI1.class = "material-icons right";
+    innerI1.textContent = "more_vert";
+    innerSpan1.append(innerI1);
+    let innerPara = genEle('p');
+    innerPara.id = "gameSearchPublisher";
+    innerDiv2.append(innerSpan1);
+    innerDiv2.append(innerPara);
+
+    let innerDiv3 = genEle('div');
+    innerDiv3.class = "card-reveal grey lighten-1";
+    let innerSpan2 = genEle('span');
+    innerSpan2.class = "card-title grey-text text-darken-4";
+    innerSpan2.textContent = "Card Title";
+    let innerI2 = genEle('i');
+    innerI2.class = "material-icons right";
+    innerI2.textContent = "close";
+    innerSpan2.append(innerI2)
+    let innerPara2 = genEle('p');
+    innerPara2.textContent = "Need to add description, MSRP, playtime and extra info here.";
+    innerDiv3.append(innerSpan2);
+    innerDiv3.append(innerPara2);
+
+    outerMostDiv.append(innerDiv1);
+    outerMostDiv.append(innerDiv2);
+    outerMostDiv.append(innerDiv3);
+
+    return outerMostDiv;
+}
+
+function genEle(type){
+    return document.createElement(type);
+}
+
+        
+
+
+
