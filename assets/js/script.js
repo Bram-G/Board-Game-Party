@@ -5,6 +5,7 @@ let gameNameInput = document.querySelector("#gameNameInput");
 let searchButton = document.querySelector(".btn");
 let lowerSection = document.querySelector("#lower-section");
 let gameHistory = document.querySelector(".gameHistory");
+let randomButton = document.querySelector("#randomizer");
 // ah-api-key = AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI
 // ah-api-key2 = AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
@@ -39,40 +40,16 @@ searchButton.addEventListener("click", (e) => {
 
   gameSearch(baseURL + endURL);
   gameRandom(baseURL + endURL);
+
+  generatePastGameCard();
 });
-
-// Pulling a random game and some brief info from the Board Game Atlas API
-function gameRandom(url) {
-  fetch(url)
+// click event listening for random button to be pressed then adding random game to main card
+randomButton.addEventListener("click", (e) => {
+  console.log("hehe you clicked the dice");
+  fetch(endPointAtlasRandom)
     .then((response) => response.json())
     .then((data) => {
       console.log(data);
-      lowerSection.innerHTML = "";
-      for (let index = 1; index < 5; index++) {
-        generateCards(
-          data.games[index].name,
-          data.games[index].images.medium,
-          data.games[index].primary_publisher.name,
-          data.games[index].description_preview,
-          data.games[index].msrp,
-          data.games[index].min_playtime,
-          data.games[index].max_playtime,
-          data.games[index].id
-        );
-      }
-    });
-}
-
-// results for game that user SEARCHES for in the search bar and clicks submit
-function gameSearch(url) {
-  fetch(url)
-    .then((response) => response.json())
-    .then((data) => {
-      console.log(data);
-
-      let gameTitle = data.games[0].name;
-      let youTubeSearch = `${gameTitle} boardgame`;
-
       document.getElementById("gameSearchTitle").textContent =
         "Title: " + data.games[0].name;
       document.getElementById("gameSearchDescription").textContent =
@@ -88,11 +65,68 @@ function gameSearch(url) {
       document.getElementById("gameSearchPublisher").textContent =
         "Publisher: " + data.games[0].primary_publisher.name;
 
-      generatePastGameCard(
-        data.games[0].images.medium,
-        gameTitle,
-        data.games[0].primary_publisher.name
-      );
+      let gameTitle = data.games[0].name;
+      let youTubeSearch = `${gameTitle} boardgame`;
+
+      const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
+      searchYoutube(endPointYoutubeSearch);
+
+      let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
+      document.getElementById("gameAmazonSearch").href = amazonSearchLink;
+      document.getElementById("gameAmazonSearch").textContent =
+        "Search on Amazon";
+    });
+});
+
+// Pulling a random game and some brief info from the Board Game Atlas API
+function gameRandom(url) {
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      for (let index = 1; index < 5; index++) {
+        generateCards(
+          data.games[index].name,
+          data.games[index].images.medium,
+          data.games[index].primary_publisher.name,
+          data.games[index].msrp,
+          data.games[index].min_playtime,
+          data.games[index].max_playtime,
+          data.games[index].id
+        );
+      }
+      // document.getElementById('gameRandomTitle').textContent = "Title: " + data.games[0].name
+      // document.getElementById('gameRandomImage').src = data.games[0].images.medium
+      //document.getElementById('gameRandomRating').textContent = "Rating: " + data.games[0].average_user_rating
+      //document.getElementById('gameRandomReleaseDate').textContent = "Release Date: " + data.games[0].year_published
+      //document.getElementById('gameRandomMsrp').textContent = "MSRP: $" + data.games[0].msrp
+      //document.getElementById('gameRandomPublisher').textContent = "Publisher: " + data.games[0].primary_publisher.name
+    });
+}
+
+// results for game that user SEARCHES for in the search bar and clicks submit
+function gameSearch(url) {
+  fetch(url)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      document.getElementById("gameSearchTitle").textContent =
+        "Title: " + data.games[0].name;
+      document.getElementById("gameSearchDescription").textContent =
+        data.games[0].description_preview;
+      document.getElementById("gameSearchImage").src =
+        data.games[0].images.medium;
+      document.getElementById("gameSearchRating").textContent =
+        "Rating: " + data.games[0].average_user_rating;
+      document.getElementById("gameSearchReleaseDate").textContent =
+        "Release Date: " + data.games[0].year_published;
+      document.getElementById("gameSearchMsrp").textContent =
+        "MSRP: $" + data.games[0].msrp;
+      document.getElementById("gameSearchPublisher").textContent =
+        "Publisher: " + data.games[0].primary_publisher.name;
+
+      let gameTitle = data.games[0].name;
+      let youTubeSearch = `${gameTitle} boardgame`;
 
       const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
       searchYoutube(endPointYoutubeSearch);
@@ -136,10 +170,10 @@ function generateCards(
   gameName,
   gamePicture,
   gamePublisher,
-  gameDescription,
   gameMsrp,
   gameMinPlaytime,
-  gameMaxPlaytime
+  gameMaxPlaytime,
+  gameId
 ) {
   let outerMostDiv = genEle("div");
   outerMostDiv.setAttribute("class", "card small z-depth-4 col s12 m5 l5");
@@ -196,16 +230,17 @@ function generateCards(
   innerMostDiv.setAttribute("class", "card-action");
   innerMostDiv.setAttribute("id", "card-action-flex");
   let innerAnchor = genEle("a");
-  innerAnchor.setAttribute("class", "waves-effect waves-light light-blue btn");
-  innerAnchor.textContent = "Save Game";
+  innerAnchor.setAttribute("class", "waves-effect waves-light btn light-blue");
+  innerAnchor.setAttribute("id", "gameCardHistoryID");
+  innerAnchor.textContent = "Save Game To History";
   let innerMostI = genEle("i");
   innerMostI.setAttribute("class", "material-icons left");
   innerMostI.setAttribute("id", "gameHistoryID");
-  innerMostI.textContent = "save";
+  innerMostI.textContent = "history";
   let a1 = genEle("a");
   a1.setAttribute("class", "waves-effect waves-light btn light-blue");
   a1.setAttribute("id", "pastSearchBtn");
-  a1.textContent = "Show this game";
+  a1.textContent = "Show This Search";
   let i1 = genEle("i");
   i1.setAttribute("class", "material-icons left");
   i1.textContent = "history";
@@ -224,11 +259,25 @@ function generateCards(
   outerMostDiv.append(innerDiv3);
 
   lowerSection.append(outerMostDiv);
+
+  innerAnchor.setAttribute("data-gameName", gameName);
+  innerAnchor.setAttribute("data-gamePublisher", gamePublisher);
+  innerAnchor.setAttribute("data-gameId", gameId);
+
+  innerAnchor.addEventListener("click", function () {
+    var gameName = this.getAttribute("data-gameName");
+    var gamePublisher = this.getAttribute("data-gamePublisher");
+    var gameId = this.getAttribute("data-gameId");
+    localStorage.setItem(
+      "savedItem",
+      JSON.stringify({ name: gameName, id: gameId, publisher: gamePublisher })
+    );
+  });
 }
 
-function generatePastGameCard(gameImage, gameName, gamePublisher) {
+function generatePastGameCard() {
   let div_1 = genEle("div");
-  div_1.setAttribute("class", "col s10");
+  div_1.setAttribute("class", "col s10 m6");
   div_1.setAttribute("id", "pastGameCard");
 
   let div_2 = genEle("div");
@@ -239,7 +288,7 @@ function generatePastGameCard(gameImage, gameName, gamePublisher) {
   div_2.append(div_2_1);
   div_2_1.setAttribute("class", "card-image");
   let img = genEle("img");
-  img.setAttribute("src", gameImage);
+  img.setAttribute("src", "");
   img.setAttribute("id", "gameRandomImage");
   div_2_1.append(img);
 
@@ -263,7 +312,7 @@ function generatePastGameCard(gameImage, gameName, gamePublisher) {
   let a1 = genEle("a");
   a1.setAttribute("class", "waves-effect waves-light btn light-blue");
   a1.setAttribute("id", "pastSearchBtn");
-  a1.textContent = "Show This Game";
+  a1.textContent = "Show This Search";
   let i1 = genEle("i");
   i1.setAttribute("class", "material-icons left");
   i1.textContent = "history";
@@ -273,7 +322,68 @@ function generatePastGameCard(gameImage, gameName, gamePublisher) {
   let a2 = genEle("a");
   a2.setAttribute("class", "waves-effect waves-light btn red lighten-2");
   a2.setAttribute("id", "pastSearchDelete");
-  a2.textContent = "Delete From Saved Games";
+  a2.textContent = "Delete From History";
+  let i2 = genEle("i");
+  i2.setAttribute("class", "material-icons right");
+  i2.textContent = "delete_forever";
+  a2.append(i2);
+  div_2_2_2.append(a2);
+  div_2_2.append(div_2_2_2);
+
+  gameHistory.prepend(div_1);
+}
+
+function generatePastGameCard() {
+  let div_1 = genEle("div");
+  div_1.setAttribute("class", "col s10");
+  div_1.setAttribute("id", "pastGameCard");
+
+  let div_2 = genEle("div");
+  div_1.append(div_2);
+  div_2.setAttribute(
+    "class",
+    "card horizontal deep-purple lighten-2 z-depth-4"
+  );
+
+  let div_2_1 = genEle("div");
+  div_2.append(div_2_1);
+  div_2_1.setAttribute("class", "card-image");
+  let img = genEle("img");
+  img.setAttribute("src", "");
+  img.setAttribute("id", "gameRandomImage");
+  div_2_1.append(img);
+
+  let div_2_2 = genEle("div");
+  div_2.append(div_2_2);
+  div_2_2.setAttribute("class", "card-stacked");
+
+  let div_2_2_1 = genEle("div");
+  div_2_2_1.setAttribute("class", "card-content");
+  let p1 = genEle("p");
+  p1.textContent = "Past Game Name";
+  let p2 = genEle("p");
+  p2.textContent = "Past Game Publisher";
+  div_2_2_1.append(p1);
+  div_2_2_1.append(p2);
+  div_2_2.append(div_2_2_1);
+
+  let div_2_2_2 = genEle("div");
+  div_2_2_2.setAttribute("class", "card-action");
+  div_2_2_2.setAttribute("id", "card-action-flex");
+  let a1 = genEle("a");
+  a1.setAttribute("class", "waves-effect waves-light btn light-blue");
+  a1.setAttribute("id", "pastSearchBtn");
+  a1.textContent = "Show This Search";
+  let i1 = genEle("i");
+  i1.setAttribute("class", "material-icons left");
+  i1.textContent = "history";
+  a1.append(i1);
+  div_2_2_2.append(a1);
+
+  let a2 = genEle("a");
+  a2.setAttribute("class", "waves-effect waves-light btn red darken-2");
+  a2.setAttribute("id", "pastSearchDelete");
+  a2.textContent = "Delete From History";
   let i2 = genEle("i");
   i2.setAttribute("class", "material-icons right");
   i2.textContent = "delete_forever";
@@ -304,9 +414,15 @@ function saveGameId(data) {
 document
   .getElementById("lower-section")
   .addEventListener("click", function (event) {
-    if (event.target.matches("#gameHistoryID")) {
-      var card = event.target.closest(".card");
-      var item = card.querySelector("#gameRandomTitle").textContent;
-      localStorage.setItem("savedItem", item);
+    if (event.target.matches("#gameCardHistoryID")) {
+      var gameName = event.target.getAttribute("data-gameName");
+      var gamePublisher = event.target.getAttribute("data-gamePublisher");
+      var gameId = event.target.getAttribute("data-gameId");
+      let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+      let isDuplicate = history.find((game) => game.id === gameId);
+      if (!isDuplicate) {
+        history.push({ name: gameName, id: gameId, publisher: gamePublisher });
+        localStorage.setItem("searchHistory", JSON.stringify(history));
+      }
     }
   });
