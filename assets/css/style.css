@@ -40,7 +40,7 @@ main {
 
 #blockquote-color {
     text-align: start;
-  border-left: 2px solid #03a9f4;
+    border-left: 2px solid #03a9f4;
 }
  
 #searchSubmitButton{
@@ -82,8 +82,8 @@ main {
 }
 
 #search-display-main{
-    background:linear-gradient(to #9575cd,gray);
-    border: 3px ridge #9575cd;
+    /* background:linear-gradient(to #9575cd,gray); */
+    border: 3px ridge #03a9f4;
     margin: 0 3% 0 3%;
     display: flex;
     overflow:hidden;
@@ -138,6 +138,11 @@ main {
 #card-action-flex {
     display:flex;
     justify-content: space-between;
+}
+
+#pastGameCard img{
+    height:200px;
+    width:200px;
 }
 
 #footer-flex {

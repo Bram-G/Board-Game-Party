@@ -5,7 +5,7 @@ let gameNameInput = document.querySelector("#gameNameInput");
 let searchButton = document.querySelector(".btn");
 let lowerSection = document.querySelector("#lower-section");
 let gameHistory = document.querySelector(".gameHistory");
-let randomButton = document.querySelector("#randomizer")
+let randomButton = document.querySelector("#randomizer");
 // ah-api-key = AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI
 // ah-api-key2 = AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
@@ -44,40 +44,39 @@ searchButton.addEventListener("click", (e) => {
   generatePastGameCard();
 });
 // click event listening for random button to be pressed then adding random game to main card
-randomButton.addEventListener("click", (e)=> {
-    console.log("hehe you clicked the dice")
-    fetch(endPointAtlasRandom)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            document.getElementById("gameSearchTitle").textContent =
+randomButton.addEventListener("click", (e) => {
+  console.log("hehe you clicked the dice");
+  fetch(endPointAtlasRandom)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      document.getElementById("gameSearchTitle").textContent =
         "Title: " + data.games[0].name;
-        document.getElementById("gameSearchDescription").textContent =
+      document.getElementById("gameSearchDescription").textContent =
         data.games[0].description_preview;
-        document.getElementById("gameSearchImage").src =
+      document.getElementById("gameSearchImage").src =
         data.games[0].images.medium;
-        document.getElementById("gameSearchRating").textContent =
+      document.getElementById("gameSearchRating").textContent =
         "Rating: " + data.games[0].average_user_rating;
-        document.getElementById("gameSearchReleaseDate").textContent =
+      document.getElementById("gameSearchReleaseDate").textContent =
         "Release Date: " + data.games[0].year_published;
-        document.getElementById("gameSearchMsrp").textContent =
+      document.getElementById("gameSearchMsrp").textContent =
         "MSRP: $" + data.games[0].msrp;
-        document.getElementById("gameSearchPublisher").textContent =
+      document.getElementById("gameSearchPublisher").textContent =
         "Publisher: " + data.games[0].primary_publisher.name;
 
-        let gameTitle = data.games[0].name;
-        let youTubeSearch = `${gameTitle} boardgame`;
+      let gameTitle = data.games[0].name;
+      let youTubeSearch = `${gameTitle} boardgame`;
 
-        const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
-        searchYoutube(endPointYoutubeSearch);
+      const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
+      searchYoutube(endPointYoutubeSearch);
 
-        let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
-        document.getElementById("gameAmazonSearch").href = amazonSearchLink;
-        document.getElementById("gameAmazonSearch").textContent =
+      let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
+      document.getElementById("gameAmazonSearch").href = amazonSearchLink;
+      document.getElementById("gameAmazonSearch").textContent =
         "Search on Amazon";
-    })
-
-})
+    });
+});
 
 // Pulling a random game and some brief info from the Board Game Atlas API
 function gameRandom(url) {
@@ -131,21 +130,18 @@ function gameSearch(url) {
 
       const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
       searchYoutube(endPointYoutubeSearch);
-      
 
       let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
       document.getElementById("gameAmazonSearch").href = amazonSearchLink;
       document.getElementById("gameAmazonSearch").textContent =
         "Search on Amazon";
 
-
-      document.getElementById("gameHistoryID").addEventListener("click", function(){
-
-      saveGameId(data)
-        
-      });
-    }
-  );
+      document
+        .getElementById("gameHistoryID")
+        .addEventListener("click", function () {
+          saveGameId(data);
+        });
+    });
 }
 
 function searchYoutube(url) {
@@ -179,9 +175,6 @@ function generateCards(
   gameMaxPlaytime,
   gameId
 ) {
-
-
-
   let outerMostDiv = genEle("div");
   outerMostDiv.setAttribute("class", "card small z-depth-4 col s12 m5 l5");
   outerMostDiv.setAttribute("id", "generatedSearchCard");
@@ -237,7 +230,7 @@ function generateCards(
   innerMostDiv.setAttribute("class", "card-action");
   innerMostDiv.setAttribute("id", "card-action-flex");
   let innerAnchor = genEle("a");
-  innerAnchor.setAttribute("class", "waves-effect waves-light btn light-blue")
+  innerAnchor.setAttribute("class", "waves-effect waves-light btn light-blue");
   innerAnchor.setAttribute("id", "gameCardHistoryID");
   innerAnchor.textContent = "Save Game To History";
   let innerMostI = genEle("i");
@@ -267,18 +260,19 @@ function generateCards(
 
   lowerSection.append(outerMostDiv);
 
-innerAnchor.setAttribute("data-gameName", gameName);
-innerAnchor.setAttribute("data-gamePublisher", gamePublisher);
-innerAnchor.setAttribute("data-gameId", gameId);
+  innerAnchor.setAttribute("data-gameName", gameName);
+  innerAnchor.setAttribute("data-gamePublisher", gamePublisher);
+  innerAnchor.setAttribute("data-gameId", gameId);
 
-innerAnchor.addEventListener("click", function(){
-  var gameName = this.getAttribute("data-gameName");
-  var gamePublisher = this.getAttribute("data-gamePublisher");
-  var gameId = this.getAttribute("data-gameId");
-  localStorage.setItem("savedItem", JSON.stringify({ name: gameName, id: gameId, publisher: gamePublisher }));
-});
-
-
+  innerAnchor.addEventListener("click", function () {
+    var gameName = this.getAttribute("data-gameName");
+    var gamePublisher = this.getAttribute("data-gamePublisher");
+    var gameId = this.getAttribute("data-gameId");
+    localStorage.setItem(
+      "savedItem",
+      JSON.stringify({ name: gameName, id: gameId, publisher: gamePublisher })
+    );
+  });
 }
 
 function generatePastGameCard() {
@@ -288,10 +282,7 @@ function generatePastGameCard() {
 
   let div_2 = genEle("div");
   div_1.append(div_2);
-  div_2.setAttribute(
-    "class",
-    "card horizontal deep-purple lighten-2 z-depth-4"
-  );
+  div_2.setAttribute("class", "card horizontal blue darken-1 z-depth-4");
 
   let div_2_1 = genEle("div");
   div_2.append(div_2_1);
@@ -329,7 +320,7 @@ function generatePastGameCard() {
   div_2_2_2.append(a1);
 
   let a2 = genEle("a");
-  a2.setAttribute("class", "waves-effect waves-light btn red darken-2");
+  a2.setAttribute("class", "waves-effect waves-light btn red lighten-2");
   a2.setAttribute("id", "pastSearchDelete");
   a2.textContent = "Delete From History";
   let i2 = genEle("i");
@@ -420,19 +411,18 @@ function saveGameId(data) {
   }
 }
 
-
-document.getElementById("lower-section").addEventListener("click", function(event) {
-  if (event.target.matches("#gameCardHistoryID")) {
-   
-    var gameName = event.target.getAttribute("data-gameName");
-    var gamePublisher = event.target.getAttribute("data-gamePublisher");
-    var gameId = event.target.getAttribute("data-gameId");
-    let  history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-    let isDuplicate = history.find((game) => game.id === gameId);
-    if (!isDuplicate) {
-      history.push({ name: gameName, id: gameId, publisher: gamePublisher });
-      localStorage.setItem("searchHistory", JSON.stringify(history));
-  }
-}}
-);
-
+document
+  .getElementById("lower-section")
+  .addEventListener("click", function (event) {
+    if (event.target.matches("#gameCardHistoryID")) {
+      var gameName = event.target.getAttribute("data-gameName");
+      var gamePublisher = event.target.getAttribute("data-gamePublisher");
+      var gameId = event.target.getAttribute("data-gameId");
+      let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
+      let isDuplicate = history.find((game) => game.id === gameId);
+      if (!isDuplicate) {
+        history.push({ name: gameName, id: gameId, publisher: gamePublisher });
+        localStorage.setItem("searchHistory", JSON.stringify(history));
+      }
+    }
+  });
