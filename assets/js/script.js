@@ -81,6 +81,7 @@ function gameRandom(url) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      lowerSection.innerHTML = "";
       console.log(data);
       for (let index = 1; index < 5; index++) {
         generateCards(
