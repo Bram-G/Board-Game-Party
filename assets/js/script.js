@@ -11,7 +11,7 @@ let randomButton = document.querySelector("#randomizer");
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
 const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`;
 const endPointAtlasSearch = `https://api.boardgameatlas.com/api/search?name=catan&client_id=gwluPRwMeB&pretty=true`;
-const YT_API_KEY = "AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM";
+const YT_API_KEY = "AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI";
 /*
 bga api search criteria min_players= max_players= lt_max_playtime= categories=
 */
@@ -40,8 +40,6 @@ searchButton.addEventListener("click", (e) => {
 
   gameSearch(baseURL + endURL);
   gameRandom(baseURL + endURL);
-
-  generatePastGameCard();
 });
 // click event listening for random button to be pressed then adding random game to main card
 randomButton.addEventListener("click", (e) => {
@@ -263,19 +261,37 @@ function generateCards(
   innerAnchor.setAttribute("data-gameName", gameName);
   innerAnchor.setAttribute("data-gamePublisher", gamePublisher);
   innerAnchor.setAttribute("data-gameId", gameId);
-
-  innerAnchor.addEventListener("click", function () {
-    var gameName = this.getAttribute("data-gameName");
-    var gamePublisher = this.getAttribute("data-gamePublisher");
-    var gameId = this.getAttribute("data-gameId");
-    localStorage.setItem(
-      "savedItem",
-      JSON.stringify({ name: gameName, id: gameId, publisher: gamePublisher })
-    );
-  });
+  innerAnchor.setAttribute("data-gameImage", gamePicture);
 }
 
-function generatePastGameCard() {
+pullHistoryData();
+function pullHistoryData() {
+  let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
+  if (pastGameData != null) {
+    for (let i = 0; i < pastGameData.length; i++) {
+      generatePastGameCard(
+        pastGameData[i].name,
+        pastGameData[i].publisher,
+        pastGameData[i].image
+      );
+    }
+  }
+}
+pullHistoryData();
+function pullHistoryData() {
+  let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
+  if (pastGameData != null) {
+    for (let i = 0; i < pastGameData.length; i++) {
+      generatePastGameCard(
+        pastGameData[i].name,
+        pastGameData[i].publisher,
+        pastGameData[i].image
+      );
+    }
+  }
+}
+
+function generatePastGameCard(savedName, savedPublisher, savedImage) {
   let div_1 = genEle("div");
   div_1.setAttribute("class", "col s10 m6");
   div_1.setAttribute("id", "pastGameCard");
@@ -288,7 +304,7 @@ function generatePastGameCard() {
   div_2.append(div_2_1);
   div_2_1.setAttribute("class", "card-image");
   let img = genEle("img");
-  img.setAttribute("src", "");
+  img.setAttribute("src", savedImage);
   img.setAttribute("id", "gameRandomImage");
   div_2_1.append(img);
 
@@ -299,9 +315,9 @@ function generatePastGameCard() {
   let div_2_2_1 = genEle("div");
   div_2_2_1.setAttribute("class", "card-content");
   let p1 = genEle("p");
-  p1.textContent = "Past Game Name";
+  p1.textContent = savedName;
   let p2 = genEle("p");
-  p2.textContent = "Past Game Publisher";
+  p2.textContent = savedPublisher;
   div_2_2_1.append(p1);
   div_2_2_1.append(p2);
   div_2_2.append(div_2_2_1);
@@ -405,11 +421,18 @@ function saveGameId(data) {
   let gameName = data.games[0].name;
   let gameId = data.games[0].id;
   let gamePublisher = data.games[0].primary_publisher.name;
+  let gameImage = data.games[0].image_url;
   let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
   let isDuplicate = history.find((game) => game.id === gameId);
   if (!isDuplicate) {
-    history.push({ name: gameName, id: gameId, publisher: gamePublisher });
+    history.push({
+      name: gameName,
+      id: gameId,
+      publisher: gamePublisher,
+      image: gameImage,
+    });
     localStorage.setItem("searchHistory", JSON.stringify(history));
+    generatePastGameCard(gameName, gamePublisher, gameImage);
   }
 }
 
@@ -420,11 +443,17 @@ document
       var gameName = event.target.getAttribute("data-gameName");
       var gamePublisher = event.target.getAttribute("data-gamePublisher");
       var gameId = event.target.getAttribute("data-gameId");
+      var gameImage = event.target.getAttribute("data-gameImage");
       let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
       let isDuplicate = history.find((game) => game.id === gameId);
       if (!isDuplicate) {
-        history.push({ name: gameName, id: gameId, publisher: gamePublisher });
+        history.push({
+          name: gameName,
+          image: gameImage,
+          publisher: gamePublisher,
+        });
         localStorage.setItem("searchHistory", JSON.stringify(history));
+        generatePastGameCard(gameName, gamePublisher, gameImage);
       }
     }
   });
