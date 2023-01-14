@@ -1,0 +1,200 @@
+main {
+    margin:5px;
+}
+
+  /* label color */
+  .input-field label {
+    color: #000;
+  }
+
+  input[type=text]:not(.browser-default):focus:not([readonly]) {
+    border-bottom: 1px solid #03a9f4 ;
+    box-shadow: 0 1px 0 0 #03a9f4 ;
+  }
+
+  input[type=text]:focus:not(.browser-default).validate+label {
+    color:#03a9f4 ;
+  }
+
+.gameHistory {
+    margin: 0 4% 0 4%;
+}
+#nav-responsive{
+    margin-left: 3%;
+}
+#headLink{
+    position: relative;
+    right: 30%;
+}
+#randomizer{
+    border: none;
+    outline: none;
+}
+#h3-saved-games {
+    text-align: center;
+    padding-bottom: 1%;
+    margin-left:3%;
+    margin-right:3%;
+    border-bottom:1px solid black;
+}
+
+#blockquote-color {
+    text-align: start;
+  border-left: 2px solid #03a9f4;
+}
+ 
+#searchSubmitButton{
+    display: flex;
+    justify-content: center;
+    justify-items: center;
+}
+#searchInputs{
+    margin: 10px;
+}
+
+#searchHeader{
+    margin-top:10px;
+    margin-left:3%;
+    margin-right:3%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#search-display-picture{
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    overflow:hidden;
+    margin: 0 1% 0 1%;
+}
+
+
+#search-info{
+    position: relative;
+    text-align: center;
+    width:100%;
+    margin: 1% 0 1% 0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction:column;
+    align-items:flex-start;
+}
+
+#search-display-main{
+    background:linear-gradient(to #9575cd,gray);
+    border: 3px ridge #9575cd;
+    margin: 0 3% 0 3%;
+    display: flex;
+    overflow:hidden;
+}
+#gameSearchTitle{
+    text-align: center;
+}
+
+#searched-links{
+    display: flex;
+    width:100%;
+    justify-content: space-evenly;
+    margin-bottom:1%;
+}
+
+#lower-section {
+    display:flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#generatedSearchCard {
+    margin:5px;
+}
+
+#gameSearchDescription {
+    text-align: left;
+}
+
+#card-text-generated {
+    font-size:85%;
+    color:gray;
+}
+
+#card-reveal-description {
+    text-overflow:ellipsis;
+    max-height:400px;
+}
+
+#lower-section img {
+    transition:margin 0.7s ease-in-out;
+    transition:all 1s;
+}
+
+#lower-section img:hover,
+#lower-section img:focus {
+    scale:102%;
+    margin-top:-10px;
+    margin-left:-10px;
+}
+
+#card-action-flex {
+    display:flex;
+    justify-content: space-between;
+}
+
+#footer-flex {
+    display:flex;
+    justify-content: space-between;
+    padding: 0 0.5% 0 0.5%;
+}
+
+@media screen and ( max-width:800px) {
+
+
+    #search-display-main {
+        flex-direction:column;
+        justify-content: center;
+    }
+
+    #search-display-picture {
+        margin:0;
+        width:100%;
+        align-items:center;
+        justify-content: center;
+    }
+
+    #search-info {
+        position:relative;
+        left:5%;
+        width:90%;
+        justify-content: center;
+    }
+
+}
+
+@media screen and ( max-width:800px) {
+    #searched-links {
+        flex-direction:column;
+    }
+}
+
+@media screen and (max-width:550px) {
+    #nav-responsive a {
+        display: flex;
+        width:100%;
+        justify-content: center;
+    }
+
+    input[type=text]:not(.browser-default):not([readonly]) {
+        padding-bottom:38%;
+    }
+}
+
+@media screen and (max-width:400px) {
+
+    #searchHeader {
+        flex-wrap:wrap;
+    }
+
+    #inputFields {
+        width:50%;
+    }
+}
