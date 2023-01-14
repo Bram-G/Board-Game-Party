@@ -266,6 +266,7 @@ function generateCards(
 
 pullHistoryData();
 function pullHistoryData() {
+  gameHistory.innerHTML = "";
   let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
   if (pastGameData != null) {
     for (let i = 0; i < pastGameData.length; i++) {
@@ -277,19 +278,22 @@ function pullHistoryData() {
     }
   }
 }
-pullHistoryData();
-function pullHistoryData() {
-  let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
-  if (pastGameData != null) {
-    for (let i = 0; i < pastGameData.length; i++) {
-      generatePastGameCard(
-        pastGameData[i].name,
-        pastGameData[i].publisher,
-        pastGameData[i].image
-      );
-    }
-  }
-}
+
+// duplicate function again?
+
+// pullHistoryData();
+// function pullHistoryData() {
+//   let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
+//   if (pastGameData != null) {
+//     for (let i = 0; i < pastGameData.length; i++) {
+//       generatePastGameCard(
+//         pastGameData[i].name,
+//         pastGameData[i].publisher,
+//         pastGameData[i].image
+//       );
+//     }
+//   }
+// }
 
 function generatePastGameCard(savedName, savedPublisher, savedImage) {
   let div_1 = genEle("div");
