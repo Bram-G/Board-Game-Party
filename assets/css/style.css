@@ -19,6 +19,13 @@ main {
 .gameHistory {
     margin: 0 4% 0 4%;
 }
+#nav-responsive{
+    margin-left: 3%;
+}
+#headLink{
+    position: relative;
+    right: 30%;
+}
 #randomizer{
     border: none;
     outline: none;
