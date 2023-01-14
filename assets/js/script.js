@@ -40,8 +40,6 @@ searchButton.addEventListener("click", (e) => {
 
   gameSearch(baseURL + endURL);
   gameRandom(baseURL + endURL);
-
-  
 });
 // click event listening for random button to be pressed then adding random game to main card
 randomButton.addEventListener("click", (e) => {
@@ -83,6 +81,7 @@ function gameRandom(url) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
+      lowerSection.innerHTML = "";
       console.log(data);
       for (let index = 1; index < 5; index++) {
         generateCards(
@@ -264,31 +263,40 @@ function generateCards(
   innerAnchor.setAttribute("data-gamePublisher", gamePublisher);
   innerAnchor.setAttribute("data-gameId", gameId);
   innerAnchor.setAttribute("data-gameImage", gamePicture);
-
 }
 
 pullHistoryData();
 function pullHistoryData() {
+  gameHistory.innerHTML = "";
   let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
   if (pastGameData != null) {
     for (let i = 0; i < pastGameData.length; i++) {
-      generatePastGameCard(pastGameData[i].name, pastGameData[i].publisher, pastGameData[i].image);
-    }
-  }
-}
-pullHistoryData();
-function pullHistoryData() {
-  let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
-  if (pastGameData != null) {
-    for (let i = 0; i < pastGameData.length; i++) {
-      generatePastGameCard(pastGameData[i].name, pastGameData[i].publisher, pastGameData[i].image);
+      generatePastGameCard(
+        pastGameData[i].name,
+        pastGameData[i].publisher,
+        pastGameData[i].image
+      );
     }
   }
 }
 
+// duplicate function again?
+
+// pullHistoryData();
+// function pullHistoryData() {
+//   let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
+//   if (pastGameData != null) {
+//     for (let i = 0; i < pastGameData.length; i++) {
+//       generatePastGameCard(
+//         pastGameData[i].name,
+//         pastGameData[i].publisher,
+//         pastGameData[i].image
+//       );
+//     }
+//   }
+// }
 
 function generatePastGameCard(savedName, savedPublisher, savedImage) {
-
   let div_1 = genEle("div");
   div_1.setAttribute("class", "col s10 m6");
   div_1.setAttribute("id", "pastGameCard");
@@ -344,8 +352,9 @@ function generatePastGameCard(savedName, savedPublisher, savedImage) {
   div_2_2.append(div_2_2_2);
 
   gameHistory.prepend(div_1);
- 
 }
+
+// this function below is not necessary, it is a duplicate and is causing problems...
 
 // function generatePastGameCard() {
 //   let div_1 = genEle("div");
@@ -421,7 +430,12 @@ function saveGameId(data) {
   let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
   let isDuplicate = history.find((game) => game.id === gameId);
   if (!isDuplicate) {
-    history.push({ name: gameName, id: gameId, publisher: gamePublisher, image: gameImage});
+    history.push({
+      name: gameName,
+      id: gameId,
+      publisher: gamePublisher,
+      image: gameImage,
+    });
     localStorage.setItem("searchHistory", JSON.stringify(history));
     generatePastGameCard(gameName, gamePublisher, gameImage);
   }
@@ -438,7 +452,11 @@ document
       let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
       let isDuplicate = history.find((game) => game.id === gameId);
       if (!isDuplicate) {
-        history.push({ name: gameName, image: gameImage, publisher: gamePublisher });
+        history.push({
+          name: gameName,
+          image: gameImage,
+          publisher: gamePublisher,
+        });
         localStorage.setItem("searchHistory", JSON.stringify(history));
         generatePastGameCard(gameName, gamePublisher, gameImage);
       }
