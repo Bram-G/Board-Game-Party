@@ -233,10 +233,7 @@ function generatePastGameCard(gameImage, gameName, gamePublisher) {
 
   let div_2 = genEle("div");
   div_1.append(div_2);
-  div_2.setAttribute(
-    "class",
-    "card horizontal deep-purple lighten-2 z-depth-4"
-  );
+  div_2.setAttribute("class", "card horizontal blue darken-1 z-depth-4");
 
   let div_2_1 = genEle("div");
   div_2.append(div_2_1);
@@ -274,7 +271,7 @@ function generatePastGameCard(gameImage, gameName, gamePublisher) {
   div_2_2_2.append(a1);
 
   let a2 = genEle("a");
-  a2.setAttribute("class", "waves-effect waves-light btn red darken-2");
+  a2.setAttribute("class", "waves-effect waves-light btn red lighten-2");
   a2.setAttribute("id", "pastSearchDelete");
   a2.textContent = "Delete From Saved Games";
   let i2 = genEle("i");
