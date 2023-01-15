@@ -11,7 +11,7 @@ let randomButton = document.querySelector("#randomizer");
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
 const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`;
 const endPointAtlasSearch = `https://api.boardgameatlas.com/api/search?name=catan&client_id=gwluPRwMeB&pretty=true`;
-const YT_API_KEY = "AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI";
+const YT_API_KEY = "AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM";
 
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -67,28 +67,29 @@ randomButton.addEventListener("click", (e) => {
       document.getElementById("gameAmazonSearch").href = amazonSearchLink;
       document.getElementById("gameAmazonSearch").textContent =
         "Search on Amazon";
+
+      for (let index = 0; index < 2; index++) {
+        fetch(endPointAtlasRandom)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            generateCards(
+              data.games[0].name,
+              data.games[0].images.medium,
+              data.games[0].primary_publisher.name,
+              data.games[0].msrp,
+              data.games[0].min_playtime,
+              data.games[0].max_playtime,
+              data.games[0].id
+            );
+          });
+        document
+          .getElementById("gameHistoryID")
+          .addEventListener("click", function () {
+            saveGameId(data);
+          });
+      }
     });
-  for (let index = 0; index < 2; index++) {
-    fetch(endPointAtlasRandom)
-      .then((response) => response.json())
-      .then((data) => {
-        console.log(data);
-        generateCards(
-          data.games[0].name,
-          data.games[0].images.medium,
-          data.games[0].primary_publisher.name,
-          data.games[0].msrp,
-          data.games[0].min_playtime,
-          data.games[0].max_playtime,
-          data.games[0].id
-        );
-      });
-    document
-      .getElementById("gameHistoryID")
-      .addEventListener("click", function () {
-        saveGameId(data);
-      });
-  }
 });
 
 // Pulling a random game and some brief info from the Board Game Atlas API
