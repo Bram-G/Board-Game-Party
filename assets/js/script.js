@@ -49,7 +49,7 @@ randomButton.addEventListener("click", (e) => {
       document.getElementById("gameSearchImage").src =
         data.games[0].images.medium;
       document.getElementById("gameSearchRating").textContent =
-        "Rating: " + data.games[0].average_user_rating;
+        "Rating: " + data.games[0].average_user_rating.toFixed(2);
       document.getElementById("gameSearchReleaseDate").textContent =
         "Release Date: " + data.games[0].year_published;
       document.getElementById("gameSearchMsrp").textContent =
@@ -110,7 +110,7 @@ function gameSearch(url) {
       document.getElementById("gameSearchImage").src =
         data.games[0].images.medium;
       document.getElementById("gameSearchRating").textContent =
-        "Rating: " + data.games[0].average_user_rating;
+        "Rating: " + data.games[0].average_user_rating.toFixed(2);
       document.getElementById("gameSearchReleaseDate").textContent =
         "Release Date: " + data.games[0].year_published;
       document.getElementById("gameSearchMsrp").textContent =
@@ -501,3 +501,38 @@ document.querySelector(".gameHistory").addEventListener("click", (event) => {
     gameRandom(randomUrl);
   }
 });
+
+function generateGameOnPageLoad() {
+  fetch(endPointAtlasRandom)
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+      document.getElementById("gameSearchTitle").textContent =
+        "Title: " + data.games[0].name;
+      document.getElementById("gameSearchDescription").textContent =
+        data.games[0].description_preview;
+      document.getElementById("gameSearchImage").src =
+        data.games[0].images.medium;
+      document.getElementById("gameSearchRating").textContent =
+        "Rating: " + data.games[0].average_user_rating.toFixed(2);
+      document.getElementById("gameSearchReleaseDate").textContent =
+        "Release Date: " + data.games[0].year_published;
+      document.getElementById("gameSearchMsrp").textContent =
+        "MSRP: $" + data.games[0].msrp;
+      document.getElementById("gameSearchPublisher").textContent =
+        "Publisher: " + data.games[0].primary_publisher.name;
+
+      let gameTitle = data.games[0].name;
+      let youTubeSearch = `${gameTitle} boardgame`;
+
+      const endPointYoutubeSearch = `https://www.googleapis.com/youtube/v3/search?part=snippet&q=${youTubeSearch}&key=${YT_API_KEY}`;
+      searchYoutube(endPointYoutubeSearch);
+
+      let amazonSearchLink = `https://www.amazon.com/s?k=${gameTitle}`;
+      document.getElementById("gameAmazonSearch").href = amazonSearchLink;
+      document.getElementById("gameAmazonSearch").textContent =
+        "Search on Amazon";
+    });
+}
+
+generateGameOnPageLoad();
