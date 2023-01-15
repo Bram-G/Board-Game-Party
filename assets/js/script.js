@@ -348,6 +348,30 @@ function generatePastGameCard(savedName, savedPublisher, savedImage) {
   div_2_2.append(div_2_2_2);
 
   gameHistory.prepend(div_1);
+
+  a2.addEventListener("click", function () {
+    removeGameFromHistory(
+      this.parentNode.parentNode.children[0].children[0].textContent
+    );
+    this.parentNode.parentNode.parentNode.parentNode.remove();
+  });
+}
+
+//function to remove saved game from local storage and remove card from page
+function removeGameFromHistory(cheese) {
+  let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
+  for (let i = 0; i < pastGameData.length; i++) {
+    if (
+      pastGameData[i].name === cheese
+      // pastGameData[i].publisher === gamePublisher &&
+      // pastGameData[i].image === gameImage
+    ) {
+      console.log(pastGameData + " before splice");
+      pastGameData.splice(i, 1);
+      console.log(pastGameData + " after splice");
+      localStorage.setItem("searchHistory", JSON.stringify(pastGameData));
+    }
+  }
 }
 
 // this function below is not necessary, it is a duplicate and is causing problems...
@@ -420,15 +444,13 @@ function genEle(type) {
 // //function to save game id and name to local storage after search
 function saveGameId(data) {
   let gameName = data.games[0].name;
-  let gameId = data.games[0].id;
   let gamePublisher = data.games[0].primary_publisher.name;
   let gameImage = data.games[0].image_url;
   let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-  let isDuplicate = history.find((game) => game.id === gameId);
+  let isDuplicate = history.find((game) => game.name === gameName);
   if (!isDuplicate) {
     history.push({
       name: gameName,
-      id: gameId,
       publisher: gamePublisher,
       image: gameImage,
     });
