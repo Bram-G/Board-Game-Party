@@ -74,13 +74,13 @@ randomButton.addEventListener("click", (e) => {
           .then((data) => {
             console.log(data);
             generateCards(
-              data.games[0].name,
-              data.games[0].images.medium,
-              data.games[0].primary_publisher.name,
-              data.games[0].msrp,
-              data.games[0].min_playtime,
-              data.games[0].max_playtime,
-              data.games[0].id
+              data.games[index].name,
+              data.games[index].images.medium,
+              data.games[index].primary_publisher.name,
+              data.games[index].msrp,
+              data.games[index].min_playtime,
+              data.games[index].max_playtime,
+              data.games[index].id
             );
           });
         document
