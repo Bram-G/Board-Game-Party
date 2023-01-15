@@ -12,12 +12,6 @@ let randomButton = document.querySelector("#randomizer");
 const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`;
 const endPointAtlasSearch = `https://api.boardgameatlas.com/api/search?name=catan&client_id=gwluPRwMeB&pretty=true`;
 const YT_API_KEY = "AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI";
-/*
-bga api search criteria min_players= max_players= lt_max_playtime= categories=
-*/
-
-//gameSearch(endPointAtlasSearchTEST);
-//gameRandom(endPointAtlasRandom)
 
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -238,7 +232,8 @@ function generateCards(
   innerMostI.textContent = "history";
   let a1 = genEle("a");
   a1.setAttribute("class", "waves-effect waves-light btn light-blue");
-  a1.setAttribute("id", "pastSearchBtn");
+  a1.setAttribute("id", "pastSearchBtn"); 
+  a1.setAttribute("data-gameName", gameName); // ADDED THIS LINE FOR SHOW THIS SEARCH BUTTON -----------------------------
   a1.textContent = "Show This Search";
   let i1 = genEle("i");
   i1.setAttribute("class", "material-icons left");
@@ -331,6 +326,7 @@ function generatePastGameCard(savedName, savedPublisher, savedImage) {
   div_2_2_2.setAttribute("class", "card-action");
   div_2_2_2.setAttribute("id", "card-action-flex");
   let a1 = genEle("a");
+  a1.setAttribute("data-gameName", savedName); // ADDED THIS LINE FOR SHOW THIS SEARCH BUTTON -----------------------------
   a1.setAttribute("class", "waves-effect waves-light btn light-blue");
   a1.setAttribute("id", "pastSearchBtn");
   a1.textContent = "Show This Search";
@@ -461,4 +457,27 @@ document
         generatePastGameCard(gameName, gamePublisher, gameImage);
       }
     }
+
+    if(event.target.matches("#pastSearchBtn")){
+        let gameName = event.target.getAttribute("data-gameName");
+        let minPlayers = Math.floor(Math.random() * 8) + 1;
+        let searchUrl = `https://api.boardgameatlas.com/api/search?name=${gameName}&random=true&client_id=gwluPRwMeB&pretty=true`;
+        let randomUrl = `https://api.boardgameatlas.com/api/search?min_players=${minPlayers}&limit=5&client_id=gwluPRwMeB&pretty=true`;
+        gameSearch(searchUrl);
+        gameRandom(randomUrl);
+    }
+
   });
+
+// EVENT LISTENER FOR "SHOW THIS SEARCH" BUTTON ------------------------------------------------
+document.querySelector(".gameHistory").addEventListener('click', (event)=> {
+    if (event.target.matches("#pastSearchBtn")){
+        let gameName = event.target.getAttribute("data-gameName");
+        let minPlayers = Math.floor(Math.random() * 8) + 1;
+        let searchUrl = `https://api.boardgameatlas.com/api/search?name=${gameName}&random=true&client_id=gwluPRwMeB&pretty=true`;
+        let randomUrl = `https://api.boardgameatlas.com/api/search?min_players=${minPlayers}&limit=5&client_id=gwluPRwMeB&pretty=true`;
+        gameSearch(searchUrl);
+        gameRandom(randomUrl);
+
+    }
+});

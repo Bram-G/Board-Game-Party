@@ -16,20 +16,41 @@ main {
     color:#03a9f4 ;
   }
 
+  input.valid[type=text]:not(.browser-default) {
+    border-bottom: 1px solid #03a9f4;
+    box-shadow: 0 1px 0 0 #03a9f4;
+  }
+
 .gameHistory {
     margin: 0 4% 0 4%;
 }
+
 #nav-responsive{
     margin-left: 3%;
 }
+
 #headLink{
     position: relative;
     right: 30%;
 }
+
 #randomizer{
+    color:#03a9f4;
     border: none;
     outline: none;
+    background:transparent;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    scale:110%;
+    transition:all 100ms ease-in-out;
 }
+
+#randomizer:hover {
+    color:#028fd0;
+    scale:98%;
+}
+
 #h3-saved-games {
     text-align: center;
     padding-bottom: 1%;
