@@ -67,33 +67,29 @@ randomButton.addEventListener("click", (e) => {
       document.getElementById("gameAmazonSearch").href = amazonSearchLink;
       document.getElementById("gameAmazonSearch").textContent =
         "Search on Amazon";
-    })
-      for (let index = 0; index <  2 ; index++) {
-        fetch(endPointAtlasRandom)
-        .then((response) => response.json())
-        .then((data) => {
-            console.log(data)
-            generateCards(
-                data.games[0].name,
-                data.games[0].images.medium,
-                data.games[0].primary_publisher.name,
-                data.games[0].msrp,
-                data.games[0].min_playtime,
-                data.games[0].max_playtime,
-                data.games[0].id)
-        })
-        document.getElementById("gameHistoryID").addEventListener("click", function(){
-
-          saveGameId(data)
-          
-        })
+    });
+  for (let index = 0; index < 2; index++) {
+    fetch(endPointAtlasRandom)
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        generateCards(
+          data.games[0].name,
+          data.games[0].images.medium,
+          data.games[0].primary_publisher.name,
+          data.games[0].msrp,
+          data.games[0].min_playtime,
+          data.games[0].max_playtime,
+          data.games[0].id
+        );
+      });
+    document
+      .getElementById("gameHistoryID")
+      .addEventListener("click", function () {
+        saveGameId(data);
+      });
   }
-})
-
-
-
-
-
+});
 
 // Pulling a random game and some brief info from the Board Game Atlas API
 function gameRandom(url) {
