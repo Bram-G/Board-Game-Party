@@ -532,6 +532,12 @@ function generateGameOnPageLoad() {
       document.getElementById("gameAmazonSearch").href = amazonSearchLink;
       document.getElementById("gameAmazonSearch").textContent =
         "Search on Amazon";
+
+      document
+        .getElementById("gameHistoryID")
+        .addEventListener("click", function () {
+          saveGameId(data);
+        });
     });
 }
 
