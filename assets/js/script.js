@@ -232,7 +232,7 @@ function generateCards(
   innerMostI.textContent = "history";
   let a1 = genEle("a");
   a1.setAttribute("class", "waves-effect waves-light btn light-blue");
-  a1.setAttribute("id", "pastSearchBtn"); 
+  a1.setAttribute("id", "pastSearchBtn");
   a1.setAttribute("data-gameName", gameName); // ADDED THIS LINE FOR SHOW THIS SEARCH BUTTON -----------------------------
   a1.textContent = "Show This Search";
   let i1 = genEle("i");
@@ -348,6 +348,30 @@ function generatePastGameCard(savedName, savedPublisher, savedImage) {
   div_2_2.append(div_2_2_2);
 
   gameHistory.prepend(div_1);
+
+  a2.addEventListener("click", function () {
+    // this.parentNode.parentNode.parentNode.parentNode.remove();
+    removeGameFromHistory(
+      this.parentNode.parentNode.children[0].children[0].textContent
+    );
+  });
+}
+
+//function to remove saved game from local storage and remove card from page
+function removeGameFromHistory(cheese) {
+  let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
+  for (let i = 0; i < pastGameData.length; i++) {
+    if (
+      pastGameData[i].name === cheese
+      // pastGameData[i].publisher === gamePublisher &&
+      // pastGameData[i].image === gameImage
+    ) {
+      console.log(pastGameData + " before splice");
+      pastGameData.splice(i, 1);
+      console.log(pastGameData + " after splice");
+      localStorage.setItem("searchHistory", JSON.stringify(pastGameData));
+    }
+  }
 }
 
 // this function below is not necessary, it is a duplicate and is causing problems...
@@ -458,26 +482,24 @@ document
       }
     }
 
-    if(event.target.matches("#pastSearchBtn")){
-        let gameName = event.target.getAttribute("data-gameName");
-        let minPlayers = Math.floor(Math.random() * 8) + 1;
-        let searchUrl = `https://api.boardgameatlas.com/api/search?name=${gameName}&random=true&client_id=gwluPRwMeB&pretty=true`;
-        let randomUrl = `https://api.boardgameatlas.com/api/search?min_players=${minPlayers}&limit=5&client_id=gwluPRwMeB&pretty=true`;
-        gameSearch(searchUrl);
-        gameRandom(randomUrl);
+    if (event.target.matches("#pastSearchBtn")) {
+      let gameName = event.target.getAttribute("data-gameName");
+      let minPlayers = Math.floor(Math.random() * 8) + 1;
+      let searchUrl = `https://api.boardgameatlas.com/api/search?name=${gameName}&random=true&client_id=gwluPRwMeB&pretty=true`;
+      let randomUrl = `https://api.boardgameatlas.com/api/search?min_players=${minPlayers}&limit=5&client_id=gwluPRwMeB&pretty=true`;
+      gameSearch(searchUrl);
+      gameRandom(randomUrl);
     }
-
   });
 
 // EVENT LISTENER FOR "SHOW THIS SEARCH" BUTTON ------------------------------------------------
-document.querySelector(".gameHistory").addEventListener('click', (event)=> {
-    if (event.target.matches("#pastSearchBtn")){
-        let gameName = event.target.getAttribute("data-gameName");
-        let minPlayers = Math.floor(Math.random() * 8) + 1;
-        let searchUrl = `https://api.boardgameatlas.com/api/search?name=${gameName}&random=true&client_id=gwluPRwMeB&pretty=true`;
-        let randomUrl = `https://api.boardgameatlas.com/api/search?min_players=${minPlayers}&limit=5&client_id=gwluPRwMeB&pretty=true`;
-        gameSearch(searchUrl);
-        gameRandom(randomUrl);
-
-    }
+document.querySelector(".gameHistory").addEventListener("click", (event) => {
+  if (event.target.matches("#pastSearchBtn")) {
+    let gameName = event.target.getAttribute("data-gameName");
+    let minPlayers = Math.floor(Math.random() * 8) + 1;
+    let searchUrl = `https://api.boardgameatlas.com/api/search?name=${gameName}&random=true&client_id=gwluPRwMeB&pretty=true`;
+    let randomUrl = `https://api.boardgameatlas.com/api/search?min_players=${minPlayers}&limit=5&client_id=gwluPRwMeB&pretty=true`;
+    gameSearch(searchUrl);
+    gameRandom(randomUrl);
+  }
 });
