@@ -68,7 +68,24 @@ randomButton.addEventListener("click", (e) => {
       document.getElementById("gameAmazonSearch").textContent =
         "Search on Amazon";
 
-      for (let index = 0; index < 2; index++) {
+      lowerSection.innerHTML = "";
+
+      fetch(endPointAtlasRandom)
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          generateCards(
+            data.games[0].name,
+            data.games[0].images.medium,
+            data.games[0].primary_publisher.name,
+            data.games[0].msrp,
+            data.games[0].min_playtime,
+            data.games[0].max_playtime,
+            data.games[0].id
+          );
+        });
+
+      for (let index = 0; index < 1; index++) {
         fetch(endPointAtlasRandom)
           .then((response) => response.json())
           .then((data) => {
