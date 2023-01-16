@@ -96,7 +96,6 @@ function gameRandom(url) {
   fetch(url)
     .then((response) => response.json())
     .then((data) => {
-      console.log(data);
       lowerSection.innerHTML = "";
       let indexes = [];
       while (indexes.length < 4) {
@@ -113,7 +112,6 @@ function gameRandom(url) {
           indexes.push(index);
         }
       }
-      console.log(indexes);
       for (let x of indexes) {
         generateCards(
           data.games[x].name,
