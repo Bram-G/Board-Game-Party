@@ -11,7 +11,7 @@ let randomButton = document.querySelector("#randomizer");
 // dc-api-key = AIzaSyBDsfH-p60RH4HGaZ8FKWozhjZW7LCA_CY
 const endPointAtlasRandom = `https://api.boardgameatlas.com/api/search?random=true&client_id=gwluPRwMeB&pretty=true`;
 const endPointAtlasSearch = `https://api.boardgameatlas.com/api/search?name=catan&client_id=gwluPRwMeB&pretty=true`;
-const YT_API_KEY = "AIzaSyCTD8bBuqk848EMDD-KGrIraiHg4dhSiZI";
+const YT_API_KEY = "AIzaSyBr2xAN2JPItpBZfu8FjhFyY7-908xKleM";
 
 searchButton.addEventListener("click", (e) => {
   e.preventDefault();
@@ -49,7 +49,7 @@ randomButton.addEventListener("click", (e) => {
       document.getElementById("gameSearchImage").src =
         data.games[0].images.medium;
       document.getElementById("gameSearchRating").textContent =
-        "Rating: " + data.games[0].average_user_rating;
+        "Rating: " + data.games[0].average_user_rating.toFixed(2);
       document.getElementById("gameSearchReleaseDate").textContent =
         "Release Date: " + data.games[0].year_published;
       document.getElementById("gameSearchMsrp").textContent =
@@ -67,6 +67,28 @@ randomButton.addEventListener("click", (e) => {
       document.getElementById("gameAmazonSearch").href = amazonSearchLink;
       document.getElementById("gameAmazonSearch").textContent =
         "Search on Amazon";
+
+      for (let index = 0; index < 2; index++) {
+        fetch(endPointAtlasRandom)
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            generateCards(
+              data.games[0].name,
+              data.games[0].images.medium,
+              data.games[0].primary_publisher.name,
+              data.games[0].msrp,
+              data.games[0].min_playtime,
+              data.games[0].max_playtime,
+              data.games[0].id
+            );
+          });
+        document
+          .getElementById("gameHistoryID")
+          .addEventListener("click", function () {
+            saveGameId(data);
+          });
+      }
     });
 });
 
@@ -110,7 +132,7 @@ function gameSearch(url) {
       document.getElementById("gameSearchImage").src =
         data.games[0].images.medium;
       document.getElementById("gameSearchRating").textContent =
-        "Rating: " + data.games[0].average_user_rating;
+        "Rating: " + data.games[0].average_user_rating.toFixed(2);
       document.getElementById("gameSearchReleaseDate").textContent =
         "Release Date: " + data.games[0].year_published;
       document.getElementById("gameSearchMsrp").textContent =
@@ -348,6 +370,30 @@ function generatePastGameCard(savedName, savedPublisher, savedImage) {
   div_2_2.append(div_2_2_2);
 
   gameHistory.prepend(div_1);
+
+  a2.addEventListener("click", function () {
+    removeGameFromHistory(
+      this.parentNode.parentNode.children[0].children[0].textContent
+    );
+    this.parentNode.parentNode.parentNode.parentNode.remove();
+  });
+}
+
+//function to remove saved game from local storage and remove card from page
+function removeGameFromHistory(cheese) {
+  let pastGameData = JSON.parse(localStorage.getItem("searchHistory"));
+  for (let i = 0; i < pastGameData.length; i++) {
+    if (
+      pastGameData[i].name === cheese
+      // pastGameData[i].publisher === gamePublisher &&
+      // pastGameData[i].image === gameImage
+    ) {
+      console.log(pastGameData + " before splice");
+      pastGameData.splice(i, 1);
+      console.log(pastGameData + " after splice");
+      localStorage.setItem("searchHistory", JSON.stringify(pastGameData));
+    }
+  }
 }
 
 // this function below is not necessary, it is a duplicate and is causing problems...
@@ -420,15 +466,13 @@ function genEle(type) {
 // //function to save game id and name to local storage after search
 function saveGameId(data) {
   let gameName = data.games[0].name;
-  let gameId = data.games[0].id;
   let gamePublisher = data.games[0].primary_publisher.name;
   let gameImage = data.games[0].image_url;
   let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
-  let isDuplicate = history.find((game) => game.id === gameId);
+  let isDuplicate = history.find((game) => game.name === gameName);
   if (!isDuplicate) {
     history.push({
       name: gameName,
-      id: gameId,
       publisher: gamePublisher,
       image: gameImage,
     });
