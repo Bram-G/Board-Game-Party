@@ -114,21 +114,21 @@ function gameRandom(url) {
     .then((response) => response.json())
     .then((data) => {
       lowerSection.innerHTML = "";
-      let indexes = [];
-      while (indexes.length < 4) {
-        let index = Math.floor(Math.random() * (data.games.length - 1));
-        if (index === 0) {
-          index += 1;
-        }
-        if (
-          index !== indexes[0] &&
-          index !== indexes[1] &&
-          index !== indexes[2] &&
-          index !== indexes[3]
-        ) {
-          indexes.push(index);
-        }
-      }
+      let indexes = [1, 2, 3, 4];
+      // while (indexes.length < 4) {
+      //   let index = Math.floor(Math.random() * (data.games.length - 1));
+      //   if (index === 0) {
+      //     index += 1;
+      //   }
+      //   if (
+      //     index !== indexes[0] &&
+      //     index !== indexes[1] &&
+      //     index !== indexes[2] &&
+      //     index !== indexes[3]
+      //   ) {
+      //     indexes.push(index);
+      //   }
+      // }
       for (let x of indexes) {
         generateCards(
           data.games[x].name,
