@@ -1,68 +1,60 @@
-# Board-Game-Party
-Uses multiple API's to search a board game database and then shows a link on where to buy the game.
+# Board Game Party
 
-## New Tech
+## Description
 
-- Materialize
-- Board Game Atlas API
-- Youtube API
+This application is a website that allows you to generate board games based off of some search requirements. This project was built as a group so that we could have an easy way to generate new board games that we may not have heard of before, and solves the problem of not having anything ready for group gatherings. All four of us learned quite a bit about the collaborative github workflow, and working through the challenges of working as a group.
 
-## Elevator Pitch
+## Installation
 
-Have you ever had guests over, family or friends, and have had that awkward experience where nobody knows what to do because you had nothing planned?
+No installation is required. Visit the link of the deployed page [here](https://bram-g.github.io/Board-Game-Party/).
 
-Well, worry no more!
-With our new application: Board Game Party, you will be able to do at the very BARE minimum the following!
+## Usage
 
-- Generate random board games based on the following criteria:
-    - Pick a minimum amount of players!
-    - Filter by playtime and price!
-    - Game category!
-    - MAYBE other filters too!
-- See reviews for board games!
-- Watch related YouTube for board games!
+To use this tool, enter search information for any type of game that you would like, and click the 'search' button. Alternatively, the dice can be clicked to retrieve three completely random games from the API.
 
-Never again fear for a boring event that you host for your loved ones! 
+![Screenshot Of Application](./assets/images/Board-Game-Party.png)
 
-*Coming soon!*
+## Credits
 
-### Role Breakdown
+API's Used:
+- [Board Game Atlas API Docs](https://www.boardgameatlas.com/api/docs)
+- [YouTube API Docs](https://developers.google.com/youtube/v3)
 
-- Bram: UI/UX
-- Alex: API Research/Information
-- Derek: JavaScript and logic
-- Ben: JavaScript and logic
+Collaborators:
+- [Alex Hall](https://github.com/alexh3422)
+- [Ben Laubach](https://github.com/blaubachs)
+- [Bram Gibson](https://github.com/Bram-G)
+- [Derek Caldwell](https://github.com/CaldwellDerek)
 
+## Features
 
-## Wireframe and Features
+Features that the generator includes:
 
-- Form on top, this will have a combination of dropdowns and inputs to get information from user.
-- Section underneath will have a picture of generated game and title, description, info like price and user reviews. 
-- Use the YouTube API to pull in related videos.
-- Two sections below the main game (potential future feature to sort this by top rated depending on user input)
-    - Section on the left will give us extra recommendations
-    - Section on the right will give us past searched games.
+- Generate a board game based off of:
+    - Amount of players.
+    - Name.
+    - Playtime.
 
-![wireframe](./assets/images/bgpwireframe.PNG)
+- Extra games are generated in cards below the top card.
 
-## Potential Future Features
+- Games will list the following information on the main card: 
+    - Title.
+    - Image provided from API.
+    - Player ratings.
+    - Release date.
+    - MSRP price.
+    - Publisher.
+    - Description.
+    - Amazon search link.
+    - Two related YouTube videos.
 
-*Features for future development after the minimum viable product milestone is reached. This will be decided on as we evaluate progress for the application.*
+- Extra cards generated below will have the following information:
+    - Title
+    - Image provided from API.
+    - MSRP.
+    - Playtime.
 
-- Landing page.
-- Separate page for locally stored games.
-- General UI improvements.
-- Ability to sort by completely random or top rated for recommended games.
+- The user will have the ability to save any of the games generated to local storage.
+    - These cards can be deleted with the "delete from history" button.
 
-## Naming Convention
-
-- Game API Naming
-    - gameTypeTag
-        - Type is Search, Random, Input
-        - These will be used for each respective type of element.
-- YouTube API Naming TBD
-
-## Potential Issues
-
-- Probably just contruct an amazon link.
-- Try to include a link to buy or construct an amazon link to a search result.
+- All saved games, or extra games generated in cards, have the ability to be searched with the "show this search" button.
