@@ -418,7 +418,7 @@ document
       .trim();
     let imgEl = document.querySelector("#gameSearchImage");
     let imgSource = imgEl.getAttribute("src");
-    let history = JSON.parse(localStorage.getItem("searchHistory"));
+    let history = JSON.parse(localStorage.getItem("searchHistory")) || [];
     let isDuplicate = history.find((game) => game.name === title);
     if (!isDuplicate) {
       history.push({
